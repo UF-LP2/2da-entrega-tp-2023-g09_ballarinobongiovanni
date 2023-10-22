@@ -103,7 +103,7 @@ def dyc(self, cola):
 
 
 """
-
+fjjfipjdckpkcjspdjpjdsjdkskj.c..c..c.c..cdlcslcsld,
 función ordenar(cola): //en esta función se está ordenando la cola de pacientes en función de la diferencia entre el tiempo de espera y el tiempo máximo de espera, según el método de mergesort
 
 	si len(cola) >1:
