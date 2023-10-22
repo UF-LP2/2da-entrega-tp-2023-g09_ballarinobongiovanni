@@ -34,6 +34,7 @@ class Medico:
         self.presentismo = presentismo # si esta habilitado para atender o esta ocupado
 
     def atender(paciente):
+        print("faltaponeralgo")
 
 
 class Hospital:
@@ -59,47 +60,68 @@ class Hospital:
         self.listapaciente.append(paciente)
     def agregarmedico(self, medico):
         self.listamedicos.append(medico)
-    def ordenar (cola):#en esta función se está ordenando la cola de pacientes en función de la diferencia entre el tiempo de espera y el tiempo máximo de espera, según el método de mergesort
-        if len(cola)>1:
-            medio= len(cola)/2
-            izq = cola[:medio]
-            der= cola[medio:]
-            ordenar(izq)
-            ordenar(der)
+    def ordenar (self,listaespera):#en esta función se está ordenando la cola de pacientes en función de la diferencia entre el tiempo de espera y el tiempo máximo de espera, según el método de mergesort
+        if len(listaespera)>1:
+            medio = len(listaespera)/2
+            izq = listaespera[:medio]
+            der = listaespera[medio:]
+            self.ordenar(izq)
+            self.ordenar(der)
 
             i=j=k=0
-            while i< len(izq) and j< len(der):
-                if (izq[i].tiempoespera -izq[i].tiempoesperamax) < (der[j].tiempoespera - der[j].tiempomaxespera):
-                    cola[k] = izq[i]
+            while i< len(izq) and j < len(der):
+                if (izq[i].tiempoespera - izq[i].tiempoesperamax) < (der[j].tiempoespera - der[j].tiempomaxespera):
+                    listaespera[k] = izq[i]
                     i +=1
                 else:
-                    cola[k] = der[j]
-                     j +=1
-            k+=1
+                    listaespera[k] = der[j]
+                    j += 1
+            k += 1
             while i < len(izq):
-                cola[k] = izq[i]
-                i+=1
-                k+=1
+                listaespera[k] = izq[i]
+                i += 1
+                k += 1
 
             while j < len(der):
-                cola[k] = der[j]
+                listaespera[k] = der[j]
                 j+=1
                 k+=1
-            return cola[0]
+            return listaespera[0]
+    def dyc(self, listaespera):
+        j = 0
 
-
-
-def dyc(self, cola):
-        j=0
         for j in range(self.listamedicos):
-            if j.presentismo != false:
-                if self.listarojo != null:
+            if j.presentismo != False:
+                if self.listarojo != None:
                     j.atender(self.listarojo[0])
-                    self.listarojo =self. listarojo[1:]
+                    self.listarojo = self.listarojo[1:]
                 else:
-                    pacientemasproximo = ordenar(cola)
+                    pacientemasproximo = self.ordenar(listaespera)
                     j.atender(pacientemasproximo)
-                    cola = cola[1:]
+                    listaespera = listaespera[1:]
+    def greedy(self,horaactual):
+        j=0
+        for j in (self.medicoshorario(horaactual)):
+            if j.capacidad != False:
+             if self.listarojo != None:
+                j.atender(listarojo[0])
+                listarojo = listarojo[1:]#por ahi hay que hacerlo con get y set
+
+             if self.listanaranja != None:
+                j.atender(listanaranja[0])
+                self. listanaranja = self.listanaranja[1:]
+
+            if self.listaamarilla  != None:
+                 j.atender(listaamarillo[0])
+                 listaamarilla = listaamarilla[1:]
+            if self.listaverde != None:
+                 j.atender(listaamarillo[0])
+                 listaverde = listaverde[1:]
+
+            if self.listaazul != None:
+                j.atender(listaazul[0])
+                listanaazul = listanaazul[1:]
+
 
 
 """
