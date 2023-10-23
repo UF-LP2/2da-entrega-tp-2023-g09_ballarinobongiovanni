@@ -1,22 +1,23 @@
 from enum import Enum
 class Paciente :
     class enfermedades(Enum):
-         POLITRAUMATISMO_GRAVE = "Politraumatismo grave"
-         COMA = "Coma"
-         CONVULSIONES = "Convulsiones"
-         HEMORRAGIA_DIGESTIVA = "Hemorragia digestiva"
-         ISQUEMIA = "Isquemia"
-         CEFALEA_BRUSCA = "Cefalea brusca"
-         PARESIA = "Paresia"
-         HIPERTENSION_ARTERIAL = "Hipertensión arterial"
-         VERTIGO_AFECTACION_VEGETATIVA = "Vértigo con afectación vegetativa"
-         SINCOPE = "Síncope"
-         URGENCIAS_PSIQUIATRICAS = "Urgencias psiquiátricas"
-         OTALGIAS = "Otalgias"
-         ODONTALGIAS = "Odontalgias"
-         DOLORES_INESPECIFICOS_LEVES = "Dolores inespecíficos leves"
-         TRAUMATISMOS_ESGUINCES = "Traumatismos y esguinces"
-         NO_URGENCIA = "no urgencia "
+         politraumatismo = "Politraumatismo grave"
+         coma = "Coma"
+         convolusion = "Convulsiones"
+         hemorragia_dig = "Hemorragia digestiva"
+         isquemia = "Isquemia"
+         cefalea = "Cefalea brusca"
+         paresia = "Paresia"
+         hipertension = "Hipertensión arterial"
+         vertigo = "Vértigo con afectación vegetativa"
+         sincope = "Síncope"
+         urgencia_psi = "Urgencias psiquiátricas"
+         otalgias = "Otalgias"
+         odontalgia = "Odontalgias"
+         dolor_leve = "Dolores inespecíficos leves"
+         traumatismos = "Traumatismos"
+         esguinces= "Esguinces"
+         no_urgencia = "no urgencia "
 
     def __init__(self, dni, tiempoespera, tiempoesperamax, enfermedad):
         if enfermedad in Paciente.enfermedades:
@@ -28,13 +29,14 @@ class Paciente :
 
 class Medico:
     def __init__(self, dni, horarioinicio, horariofin, presentismo):
-        self.dni= dni
-        self.horarioinicio= horarioinicio
+        self.dni = dni
+        self.horarioinicio = horarioinicio
         self.horariofin = horariofin
         self.presentismo = presentismo # si esta habilitado para atender o esta ocupado
 
-    def atender(paciente):
+    def atender(self, paciente):
         print("faltaponeralgo")
+        self.presentismo = False
 
 
 class Hospital:
@@ -60,19 +62,36 @@ class Hospital:
         self.listapaciente.append(paciente)
     def agregarmedico(self, medico):
         self.listamedicos.append(medico)
-    def ordenar (self,listaespera):#en esta función se está ordenando la cola de pacientes en función de la diferencia entre el tiempo de espera y el tiempo máximo de espera, según el método de mergesort
-        if len(listaespera)>1:
-            medio = len(listaespera)/2
+    def listado(self,listaespera):
+            for paciente in listaespera:
+                if paciente.enfermedad in (Paciente.enfermedades.politraumatismo, Paciente.enfermedades.coma):
+                    self.listarojo.append(paciente)
+                elif paciente.enfermedad in (Paciente.enfermedades.convolusion, Paciente.enfermedades.hemorragia_dig,Paciente.enfermedades.isquemia):
+                    self.listanaranja.append(paciente)
+                    #nose si directamente se puede poner paciente.tiempoesperamax = 20 o tengo que hacer set
+                elif paciente.enfermedad in (Paciente.enfermedades.cefalea, Paciente.enfermedades.paresia,
+                                             Paciente.enfermedades.hipertension,Paciente.enfermedades.vertigo,Paciente.enfermedades.sincope, Paciente.enfermedades.urgencia_psi):
+                    self.listaamarillo.append(paciente)
+
+                elif paciente.enfermedad in (Paciente.enfermedades.otalgias, Paciente.enfermedades.odontalgia,
+                                             Paciente.enfermedades.dolor_leve, Paciente.enfermedades.traumatismos,Paciente.enfermedades.esguinces):
+                    self.listaverde.append(paciente)
+                else:
+                    self.listaazul.append(paciente)
+
+    def ordenar(self, listaespera):  # en esta función se está ordenando la cola de pacientes en función de la diferencia entre el tiempo de espera y el tiempo máximo de espera, según el método de mergesort
+        if len(listaespera) > 1:
+            medio = len(listaespera) / 2
             izq = listaespera[:medio]
             der = listaespera[medio:]
             self.ordenar(izq)
             self.ordenar(der)
 
-            i=j=k=0
-            while i< len(izq) and j < len(der):
+            i = j = k = 0
+            while i < len(izq) and j < len(der):
                 if (izq[i].tiempoespera - izq[i].tiempoesperamax) < (der[j].tiempoespera - der[j].tiempomaxespera):
                     listaespera[k] = izq[i]
-                    i +=1
+                    i += 1
                 else:
                     listaespera[k] = der[j]
                     j += 1
@@ -84,9 +103,10 @@ class Hospital:
 
             while j < len(der):
                 listaespera[k] = der[j]
-                j+=1
-                k+=1
+                j += 1
+                k += 1
             return listaespera[0]
+
     def dyc(self, listaespera):
         j = 0
 
@@ -99,28 +119,30 @@ class Hospital:
                     pacientemasproximo = self.ordenar(listaespera)
                     j.atender(pacientemasproximo)
                     listaespera = listaespera[1:]
-    def greedy(self,horaactual):
-        j=0
+
+    def greedy(self, horaactual):
+        j = 0
         for j in (self.medicoshorario(horaactual)):
             if j.capacidad != False:
-             if self.listarojo != None:
-                j.atender(listarojo[0])
-                listarojo = listarojo[1:]#por ahi hay que hacerlo con get y set
+                if self.listarojo != None:
+                    j.atender(self.listarojo[0])
+                    self.listarojo = self.listarojo[1:]  # por ahi hay que hacerlo con get y set
 
-             if self.listanaranja != None:
-                j.atender(listanaranja[0])
-                self. listanaranja = self.listanaranja[1:]
+                if self.listanaranja != None:
+                    j.atender(self.listanaranja[0])
+                    self.listanaranja = self.listanaranja[1:]
 
-            if self.listaamarilla  != None:
-                 j.atender(listaamarillo[0])
-                 listaamarilla = listaamarilla[1:]
+            if self.listaamarillo != None:
+                j.atender(self.listaamarillo[0])
+                self.listaamarillo = self.listaamarillo[1:]
             if self.listaverde != None:
-                 j.atender(listaamarillo[0])
-                 listaverde = listaverde[1:]
+                j.atender(self.listaamarillo[0])
+                self.listaverde = self.listaverde[1:]
 
             if self.listaazul != None:
-                j.atender(listaazul[0])
-                listanaazul = listanaazul[1:]
+                j.atender(self.listaazul[0])
+                self.listanaazul = self.listanaazul[1:]
+
 
 
 
