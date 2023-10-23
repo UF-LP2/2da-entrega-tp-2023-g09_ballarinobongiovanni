@@ -1,5 +1,5 @@
 from enum import Enum
-class Paciente :
+class Paciente:
     class enfermedades(Enum):
          politraumatismo = "Politraumatismo grave"
          coma = "Coma"
@@ -16,7 +16,7 @@ class Paciente :
          odontalgia = "Odontalgias"
          dolor_leve = "Dolores inespecíficos leves"
          traumatismos = "Traumatismos"
-         esguinces= "Esguinces"
+         esguinces = "Esguinces"
          no_urgencia = "no urgencia "
 
     def __init__(self, dni, tiempoespera, tiempoesperamax, enfermedad):
@@ -34,7 +34,7 @@ class Medico:
         self.dni = dni
         self.horarioinicio = horarioinicio
         self.horariofin = horariofin
-        self.presentismo = presentismo # si esta habilitado para atender o esta ocupado
+        self.presentismo = presentismo #si esta habilitado para atender o esta ocupado
 
     def atender(self, paciente):
         print("faltaponeralgo")
@@ -50,7 +50,8 @@ class Hospital:
         self.listaamarillo = []
         self.listaverde = []
         self.listaazul = []
-        self.nombre =nombre
+        self.nombre = nombre
+
     def medicoshorario(self, horaactual): #retorna una lista
         listamedicohabilitado = []
 
@@ -62,9 +63,12 @@ class Hospital:
 
     def agregarpaciente(self, paciente):
         self.listapaciente.append(paciente)
+
     def agregarmedico(self, medico):
         self.listamedicos.append(medico)
+
     def listado(self,listaespera):
+           
             for paciente in listaespera:
                 if paciente.enfermedad in (Paciente.enfermedades.politraumatismo, Paciente.enfermedades.coma):
                     self.listarojo.append(paciente)
@@ -84,7 +88,8 @@ class Hospital:
                     self.listaazul.append(paciente)
                     paciente.set_tiempoesperamaximo(240)
 
-    def ordenar(self, listaespera):  # en esta función se está ordenando la cola de pacientes en función de la diferencia entre el tiempo de espera y el tiempo máximo de espera, según el método de mergesort
+    def ordenar(self, listaespera): #en esta función se está ordenando la cola de pacientes en función de la diferencia entre el tiempo de espera y el tiempo máximo de espera, según el método de mergesort
+        
         if len(listaespera) > 1:
             medio = len(listaespera) / 2
             izq = listaespera[:medio]
@@ -127,11 +132,12 @@ class Hospital:
 
     def greedy(self, horaactual):
         j = 0
+
         for j in (self.medicoshorario(horaactual)):
             if j.capacidad != False:
                 if self.listarojo != None:
                     j.atender(self.listarojo[0])
-                    self.listarojo = self.listarojo[1:]  # por ahi hay que hacerlo con get y set
+                    self.listarojo = self.listarojo[1:] #por ahi hay que hacerlo con get y set
 
                 if self.listanaranja != None:
                     j.atender(self.listanaranja[0])
@@ -140,8 +146,9 @@ class Hospital:
             if self.listaamarillo != None:
                 j.atender(self.listaamarillo[0])
                 self.listaamarillo = self.listaamarillo[1:]
+                
             if self.listaverde != None:
-                j.atender(self.listaamarillo[0])
+                j.atender(self.listaverde[0])
                 self.listaverde = self.listaverde[1:]
 
             if self.listaazul != None:
