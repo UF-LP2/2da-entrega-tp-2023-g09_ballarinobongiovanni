@@ -26,6 +26,8 @@ class Paciente :
         self.tiempoespera = tiempoespera
         self.tiempoesperamax = tiempoesperamax
 
+    def set_tiempoesperamaximo(self, tiempoesperamaximo):
+        self.tiempoesperamax = tiempoesperamaximo
 
 class Medico:
     def __init__(self, dni, horarioinicio, horariofin, presentismo):
@@ -68,16 +70,19 @@ class Hospital:
                     self.listarojo.append(paciente)
                 elif paciente.enfermedad in (Paciente.enfermedades.convolusion, Paciente.enfermedades.hemorragia_dig,Paciente.enfermedades.isquemia):
                     self.listanaranja.append(paciente)
+                    paciente.set_tiempoesperamaximo(10)
                     #nose si directamente se puede poner paciente.tiempoesperamax = 20 o tengo que hacer set
                 elif paciente.enfermedad in (Paciente.enfermedades.cefalea, Paciente.enfermedades.paresia,
                                              Paciente.enfermedades.hipertension,Paciente.enfermedades.vertigo,Paciente.enfermedades.sincope, Paciente.enfermedades.urgencia_psi):
                     self.listaamarillo.append(paciente)
-
+                    paciente.set_tiempoesperamaximo(60)
                 elif paciente.enfermedad in (Paciente.enfermedades.otalgias, Paciente.enfermedades.odontalgia,
                                              Paciente.enfermedades.dolor_leve, Paciente.enfermedades.traumatismos,Paciente.enfermedades.esguinces):
                     self.listaverde.append(paciente)
+                    paciente.set_tiempoesperamaximo(120)
                 else:
                     self.listaazul.append(paciente)
+                    paciente.set_tiempoesperamaximo(240)
 
     def ordenar(self, listaespera):  # en esta función se está ordenando la cola de pacientes en función de la diferencia entre el tiempo de espera y el tiempo máximo de espera, según el método de mergesort
         if len(listaespera) > 1:
@@ -142,7 +147,6 @@ class Hospital:
             if self.listaazul != None:
                 j.atender(self.listaazul[0])
                 self.listanaazul = self.listanaazul[1:]
-
 
 
 
