@@ -39,7 +39,8 @@ class Medico:
     def atender(self, paciente):
         print("faltaponeralgo")
         self.presentismo = False
-
+    def set_presentismo(self,valor):
+        self.presentismo=valor
 class Hospital:
     def __init__(self, nombre):
         self.listapaciente = []
@@ -59,7 +60,12 @@ class Hospital:
                 listamedicohabilitado.append(medico)
 
         return listamedicohabilitado
-
+   
+    def finalizaciondehorario(self,horaactual):#cuando termina la hora queda habilitado el medico para recibir otro paciente
+        for medico in self.medicoshorario(horaactual):
+            if medico.presentismo == False:
+                medico.set_presentismo(True)
+   
     def agregarpaciente(self, paciente):
         self.listapaciente.append(paciente)
 
@@ -116,7 +122,7 @@ class Hospital:
                 k += 1
             return listaespera[0]
 
-    def dyc(self, listaespera):
+    def dyc(self, listaespera):# recibe la lista completa sin los rojos , y llama el ordenar
         j = 0
 
         for j in range(self.listamedicos):
@@ -129,7 +135,7 @@ class Hospital:
                     j.atender(pacientemasproximo)
                     listaespera = listaespera[1:]
 
-    def greedy(self, horaactual):
+    def greedy(self, horaactual):#recibe la hora del for 
         j = 0
 
         for j in (self.medicoshorario(horaactual)):
