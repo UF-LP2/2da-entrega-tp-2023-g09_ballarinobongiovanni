@@ -40,7 +40,6 @@ class Medico:
         print("faltaponeralgo")
         self.presentismo = False
 
-
 class Hospital:
     def __init__(self, nombre):
         self.listapaciente = []
@@ -143,17 +142,17 @@ class Hospital:
                     j.atender(self.listanaranja[0])
                     self.listanaranja = self.listanaranja[1:]
 
-            if self.listaamarillo != None:
-                j.atender(self.listaamarillo[0])
-                self.listaamarillo = self.listaamarillo[1:]
+                if self.listaamarillo != None:
+                    j.atender(self.listaamarillo[0])
+                    self.listaamarillo = self.listaamarillo[1:]
                 
-            if self.listaverde != None:
-                j.atender(self.listaverde[0])
-                self.listaverde = self.listaverde[1:]
+                if self.listaverde != None:
+                    j.atender(self.listaverde[0])
+                    self.listaverde = self.listaverde[1:]
 
-            if self.listaazul != None:
-                j.atender(self.listaazul[0])
-                self.listanaazul = self.listanaazul[1:]
+                if self.listaazul != None:
+                    j.atender(self.listaazul[0])
+                    self.listanaazul = self.listanaazul[1:]
 
 
 
