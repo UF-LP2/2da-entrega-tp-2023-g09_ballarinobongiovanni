@@ -4,10 +4,11 @@ from clases import Medico
 from clases import Hospital
 
 def lista_de_medicos():
-    hp= Hospital("hospital")
-    medicouno = Medico(dni= 45678910,horarioinicio=1,horariofin=5,presentismo=True)
-    medicodos = Medico(dni=12345678, horarioinicio=9, horariofin=14, presentismo=False)
-    medicotres = Medico(dni=98765432, horarioinicio=8, horariofin=12, presentismo=True)
+    hp = Hospital("hospital")
+    medico_uno = Medico(dni= 45678910,horarioinicio=1,horariofin=5,presentismo=True)
+    medico_dos = Medico(dni=12345678, horarioinicio=9, horariofin=14, presentismo=False)
+    medico_tres = Medico(dni=98765432, horarioinicio=8, horariofin=12, presentismo=True)
+    medico_cuatro = Medico(dni=98123732, horarioinicio=7, horariofin=1, presentismo=True)
     medico_cinco = Medico(dni=12345679, horarioinicio=10, horariofin=15, presentismo=True)
     medico_seis = Medico(dni=98765433, horarioinicio=9, horariofin=13, presentismo=False)
     medico_siete = Medico(dni=45678912, horarioinicio=3, horariofin=7, presentismo=True)
@@ -24,6 +25,7 @@ def lista_de_medicos():
     medico_dieciocho = Medico(dni=98765437, horarioinicio=13, horariofin=17, presentismo=False)
     medico_diecinueve = Medico(dni=45678916, horarioinicio=7, horariofin=11, presentismo=True)
     medico_veinte = Medico(dni=12345684, horarioinicio=15, horariofin=20, presentismo=False)
+    
 
 
 
