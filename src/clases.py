@@ -17,9 +17,10 @@ class Paciente:
          dolor_leve = "Dolores inespecíficos leves"
          traumatismos = "Traumatismos"
          esguinces = "Esguinces"
-         no_urgencia = "no urgencia "
+         no_urgencia = "no urgencia"
 
     def __init__(self, dni, tiempoespera, tiempoesperamax, enfermedad):
+       
         if enfermedad in Paciente.enfermedades:
             self.enfermedad = enfermedad
         self.dni = dni
@@ -39,8 +40,10 @@ class Medico:
     def atender(self, paciente):
         print("faltaponeralgo")
         self.presentismo = False
+
     def set_presentismo(self,valor):
         self.presentismo=valor
+
 class Hospital:
     def __init__(self, nombre):
         self.listapaciente = []
@@ -61,7 +64,8 @@ class Hospital:
 
         return listamedicohabilitado
    
-    def finalizaciondehorario(self,horaactual):#cuando termina la hora queda habilitado el medico para recibir otro paciente
+    def finalizaciondehorario(self,horaactual): #cuando termina la hora queda habilitado el medico para recibir otro paciente
+
         for medico in self.medicoshorario(horaactual):
             if medico.presentismo == False:
                 medico.set_presentismo(True)
@@ -122,7 +126,7 @@ class Hospital:
                 k += 1
             return listaespera[0]
 
-    def dyc(self, listaespera):# recibe la lista completa sin los rojos , y llama el ordenar
+    def dyc(self, listaespera): #recibe la lista completa sin los rojos , y llama el ordenar
         j = 0
 
         for j in range(self.listamedicos):
@@ -135,7 +139,7 @@ class Hospital:
                     j.atender(pacientemasproximo)
                     listaespera = listaespera[1:]
 
-    def greedy(self, horaactual):#recibe la hora del for 
+    def greedy(self, horaactual): #recibe la hora del for 
         j = 0
 
         for j in (self.medicoshorario(horaactual)):
@@ -159,7 +163,6 @@ class Hospital:
                 if self.listaazul != None:
                     j.atender(self.listaazul[0])
                     self.listanaazul = self.listanaazul[1:]
-
 
 
 """
