@@ -1,9 +1,10 @@
 from enum import Enum
+import csv
 class Paciente:
     class enfermedades(Enum):
          politraumatismo = "Politraumatismo grave"
          coma = "Coma"
-         convolusion = "Convulsiones"
+         convulsion = "Convulsiones"
          hemorragia_dig = "Hemorragia digestiva"
          isquemia = "Isquemia"
          cefalea = "Cefalea brusca"
@@ -54,6 +55,19 @@ class Hospital:
         self.listaverde = []
         self.listaazul = []
         self.nombre = nombre
+    
+    def pacientesarchivo(self):
+        with open("src/Pacientes.csv",'r') as file :
+            reader=csv.DictReader(file)#crea un diccionario con el encabezado, es decir que permite recorrer cada lista y ser reconocida por su encabezado
+            for row in reader:#almacenamos en cada variable el valor de cada columna
+                Dni= row['dni']
+                tiempoespe = row['tiempoespera']
+                tiempomax = row['tiempoesperamax']
+                enfermed = row ['enfermedad']
+
+                pac = Paciente(Dni, tiempoespe, tiempomax, enfermed)
+                self.agregarpaciente(pac)
+
 
     def medicoshorario(self, horaactual): #retorna una lista
         listamedicohabilitado = []
@@ -81,7 +95,7 @@ class Hospital:
             for paciente in listaespera:
                 if paciente.enfermedad in (Paciente.enfermedades.politraumatismo, Paciente.enfermedades.coma):
                     self.listarojo.append(paciente)
-                elif paciente.enfermedad in (Paciente.enfermedades.convolusion, Paciente.enfermedades.hemorragia_dig,Paciente.enfermedades.isquemia):
+                elif paciente.enfermedad in (Paciente.enfermedades.convulsion, Paciente.enfermedades.hemorragia_dig,Paciente.enfermedades.isquemia):
                     self.listanaranja.append(paciente)
                     paciente.set_tiempoesperamaximo(10)
                     #nose si directamente se puede poner paciente.tiempoesperamax = 20 o tengo que hacer set
