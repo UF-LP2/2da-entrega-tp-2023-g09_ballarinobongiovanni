@@ -111,37 +111,37 @@ class Hospital:
                     self.listaazul.append(paciente)
                     paciente.set_tiempoesperamaximo(240)
 
-    def ordenar(self, listaespera): #en esta función se está ordenando la cola de pacientes en función de la diferencia entre el tiempo de espera y el tiempo máximo de espera, según el método de mergesort
+    def ordenar(self): #en esta función se está ordenando la cola de pacientes en función de la diferencia entre el tiempo de espera y el tiempo máximo de espera, según el método de mergesort
         
-        if len(listaespera) > 1:
-            medio = len(listaespera) / 2
-            izq = listaespera[:medio]
-            der = listaespera[medio:]
+        if len(self.listapaciente) > 1:
+            medio = len(self.listapaciente) / 2
+            izq = self.listapaciente[:medio]
+            der = self.listapaciente[medio:]
             self.ordenar(izq)
             self.ordenar(der)
 
             i = j = k = 0
             while i < len(izq) and j < len(der):
                 if (izq[i].tiempoespera - izq[i].tiempoesperamax) < (der[j].tiempoespera - der[j].tiempomaxespera):
-                    listaespera[k] = izq[i]
+                    self.listapaciente[k] = izq[i]
                     i += 1
                 else:
-                    listaespera[k] = der[j]
+                    self.listapaciente[k] = der[j]
                     j += 1
             k += 1
             while i < len(izq):
-                listaespera[k] = izq[i]
+                self.listapaciente[k] = izq[i]
                 i += 1
                 k += 1
 
             while j < len(der):
-                listaespera[k] = der[j]
+                self.listapaciente[k] = der[j]
                 j += 1
                 k += 1
-            return listaespera[0]
+            return self.listapaciente[0]
 
     def dyc(self, listaespera): #recibe la lista completa sin los rojos , y llama el ordenar
-        j = 0
+        j = 0                   # si ponemos los pacientes en hp. listapaciente, hay que sacar la variable
 
         for j in range(self.listamedicos):
             if j.presentismo != False:
@@ -149,7 +149,7 @@ class Hospital:
                     j.atender(self.listarojo[0])
                     self.listarojo = self.listarojo[1:]
                 else:
-                    pacientemasproximo = self.ordenar(listaespera)
+                    pacientemasproximo = self.ordenar()
                     j.atender(pacientemasproximo)
                     listaespera = listaespera[1:]
 

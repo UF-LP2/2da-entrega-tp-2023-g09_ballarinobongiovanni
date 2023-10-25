@@ -1,9 +1,9 @@
-import pytest
-from clases import Paciente
-from clases import Medico
-from clases import Hospital
+from src.clases import Paciente
+#from clases import Medico
+from src.clases import Hospital
 
-def lista_de_medicos():
+
+"""def lista_de_medicos():
     hp = Hospital("hospital")
     hp.agregarmedico(medico_uno = Medico(dni= 45678910,horarioinicio=1,horariofin=5,presentismo=True))
     hp.agregarmedico(medico_dos = Medico(dni=12345678, horarioinicio=9, horariofin=14, presentismo=False))
@@ -25,8 +25,20 @@ def lista_de_medicos():
     medico_dieciocho = Medico(dni=98765437, horarioinicio=13, horariofin=17, presentismo=False)
     medico_diecinueve = Medico(dni=45678916, horarioinicio=7, horariofin=11, presentismo=True)
     medico_veinte = Medico(dni=12345684, horarioinicio=15, horariofin=20, presentismo=False)
+    """
+
+def test_ordenar():
+    hp = Hospital("hospital")
+    p1 = Paciente(dni=4567839, tiempoespera=5, tiempoesperamax=10, enfermedad="Isquemia")
+    p2 = Paciente(dni=4567895, tiempoespera=49, tiempoesperamax=120, enfermedad="Otalgias")
+    p3 = Paciente(dni=4567867, tiempoespera=78, tiempoesperamax=240, enfermedad="no urgencia")
     
-
-
+    hp.agregarpaciente(p1)
+    hp.agregarpaciente(p2)
+    hp.agregarpaciente(p3)
+    
+    hp.ordenar()  
+    
+    assert (hp.listapaciente[0]) == p1
 
 
