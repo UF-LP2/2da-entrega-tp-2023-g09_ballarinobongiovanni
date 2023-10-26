@@ -58,8 +58,8 @@ class Hospital:
     
     def pacientesarchivo(self):
         with open("src/Pacientes.csv",'r') as file :
-            reader=csv.DictReader(file)#crea un diccionario con el encabezado, es decir que permite recorrer cada lista y ser reconocida por su encabezado
-            for row in reader:#almacenamos en cada variable el valor de cada columna
+            reader=csv.DictReader(file) #crea un diccionario con el encabezado, es decir que permite recorrer cada lista y ser reconocida por su encabezado
+            for row in reader: #almacenamos en cada variable el valor de cada columna
                 Dni= row['dni']
                 tiempoespe = row['tiempoespera']
                 tiempomax = row['tiempoesperamax']
@@ -67,7 +67,6 @@ class Hospital:
 
                 pac = Paciente(Dni, tiempoespe, tiempomax, enfermed)
                 self.agregarpaciente(pac)
-
 
     def medicoshorario(self, horaactual): #retorna una lista
         listamedicohabilitado = []
@@ -141,7 +140,7 @@ class Hospital:
             return self.listapaciente[0]
 
     def dyc(self, listaespera): #recibe la lista completa sin los rojos , y llama el ordenar
-        j = 0                   # si ponemos los pacientes en hp. listapaciente, hay que sacar la variable
+        j = 0                   #si ponemos los pacientes en hp. listapaciente, hay que sacar la variable
 
         for j in range(self.listamedicos):
             if j.presentismo != False:
@@ -153,6 +152,7 @@ class Hospital:
                     j.atender(pacientemasproximo)
                     listaespera = listaespera[1:]
 
+"""
     def greedy(self, horaactual): #recibe la hora del for 
         j = 0
 
@@ -178,36 +178,6 @@ class Hospital:
                     j.atender(self.listaazul[0])
                     self.listanaazul = self.listanaazul[1:]
 
-
+                    
 """
-fjjfipjdckpkcjspdjpjdsjdkskj.c..c..c.c..cdlcslcsld,
-función ordenar(cola): //en esta función se está ordenando la cola de pacientes en función de la diferencia entre el tiempo de espera y el tiempo máximo de espera, según el método de mergesort
 
-	si len(cola) >1:
-		medio = len(cola)/2
-		izq = cola[:mid]
-		der = cola[mid:]
-		ordenar(izq)
-		ordenar(der)
-		
-		i=J=k=0
-		mientras i < len(izq) and j < len (der):
-			si (izq[i].tiempoespera -izq[i]tiempomaxespera) < (der[j].tiempoespera  -                                                              -der[j].tiempomaxespera):
-				cola[k] = izq[i]
-				i += 1
-			sino: 
-				cola[k] = der[j]
-				j +=1
-			k +=1
-		 mientras i < len(izq):
-			cola[k] = izq[i]
-                                  i++
-			k++
-		 mientras j< len (der):
-			cola[k] = der[j]
-			j ++
-			k++
-
-	devolver cola[0]
-
-"""
