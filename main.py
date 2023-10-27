@@ -1,39 +1,22 @@
 import random
-
+from src.clases import Paciente
+from clases import Medico
+from src.clases import Hospital
 def main() -> None:
-  cant = 0 
-  hora = 1
-  minutospasados = 0
-  valor = random.choice([True, False])
-  medico = Medico(dni, horarioinicio, horariofin, presentismo) #tengo que pasarle info
-  ordenar = ordenar()
-  hospital = Hospital(nombre) #tengo que pasarle info
+
+  hospital = Hospital("hospital") #tengo que pasarle info
+  hospital.agregarmedico(medico_uno = Medico(dni= 45678910,horarioinicio=1,horariofin=5,presentismo=True))
+  hospital.agregarmedico(medico_dos = Medico(dni=12345678, horarioinicio=9, horariofin=14, presentismo=True))
+  hospital.agregarmedico(medico_tres = Medico(dni=98765432, horarioinicio=8, horariofin=12, presentismo=True))
+  hospital.agregarmedico(medico_cuatro = Medico(dni=98123732, horarioinicio=7, horariofin=1, presentismo=True))
+  hospital.agregarmedico(medico_cinco = Medico(dni=12345679, horarioinicio=10, horariofin=15, presentismo=True))
+  hospital.pacientesarchivo()
   
-  for range in (24): #empieza en la hora 1 am y suma una hora por pasada 
-
-    if (23 < hora and hora < 6): 
-     cant = 1 #hay un enfermero disponible, igual al final si no tenemos enfermeros nose como podria ponerse en uso mas que esto
-     minutospasados = hora
-
-    if (6 < hora and hora < 10): 
-      cant = 2 #hay dos enfermeros disponibles
-      minutospasados = hora/2 #el tiempo que pasa dividido la cant. de enfermeros que pueden atender
-
-    if (10 < hora and hora < 16): 
-      cant = 5 
-      minutospasados = hora/5
-
-    if (16 < hora and hora < 23): 
-      cant = 3 
-      minutospasados = hora/3
-  
-    medico.set_presentismo(valor)
-    hospital.pacientesarchivo()
-    hospital.finalizaciondehorario(hora)
-    hospital.agregarmedico(medico)
-    hospital.listado()
-    hospital.dyc(ordenar)
-
-
+  for i in range (24): #empieza en la hora 1 am y suma una hora por pasada 
+    hospital.listado()#tendriamos que ver si los listamos dentro del for
+    hospital.medicoshorario(i)# crea una lista de los medicos habilitados para ese horario
+    ordenar=hospital.ordenar() #ordena con mergesort
+    hospital.dyc(ordenar) #funcion dividir y conquistar
+    hospital.finalizaciondehorario(i) # desocupa los medicos
 if __name__ == "__main__":
   main()
