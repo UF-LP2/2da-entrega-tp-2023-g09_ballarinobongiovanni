@@ -30,15 +30,17 @@ from src.clases import Hospital
 def test_ordenar():
     hp = Hospital("hospital")
     p1 = Paciente(dni=4567839, tiempoespera=5, tiempoesperamax=10, enfermedad="Isquemia")
-    p2 = Paciente(dni=4567895, tiempoespera=9, tiempoesperamax=120, enfermedad="Otalgias")
-    p3 = Paciente(dni=4567867, tiempoespera=8, tiempoesperamax=240, enfermedad="no urgencia")
+    p2 = Paciente(dni=4567895, tiempoespera=116, tiempoesperamax=120, enfermedad="Otalgias")
+    p3 = Paciente(dni=4567867, tiempoespera=239, tiempoesperamax=240, enfermedad="no urgencia")
     
-    hp.agregarpaciente(p1)
     hp.agregarpaciente(p2)
+    hp.agregarpaciente(p1)
     hp.agregarpaciente(p3)
+    
+    
     
     hp.ordenar()  
     
-    assert (hp.listapaciente[0].tiempoespera, hp.listapaciente[0].tiempoesperamax, hp.listapaciente[0].enfermedad) == (p1.tiempoespera, p1.tiempoesperamax, p1.enfermedad)
+    assert (hp.listapaciente[0].tiempoespera, hp.listapaciente[0].tiempoesperamax, hp.listapaciente[0].enfermedad) == (p3.tiempoespera, p3.tiempoesperamax, p3.enfermedad)
 
 

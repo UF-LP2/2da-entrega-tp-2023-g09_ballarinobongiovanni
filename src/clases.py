@@ -30,10 +30,11 @@ class Paciente:
 
     def set_tiempoesperamaximo(self, tiempoesperamaximo):
         self.tiempoesperamax = tiempoesperamaximo
-    """def __lt__(self,other):
-         return (self.tiempoespera - self.tiempoesperamax) < (other.tiempoespera - other.tiempoesperamax)"""
-    def valor(self):
-        return int(self.tiempoesperamax - self.tiempoespera)
+    def __lt__(self,other):
+         return (self.tiempoespera - self.tiempoesperamax) < (other.tiempoespera - other.tiempoesperamax)
+  
+    #def valor(self):
+       # return int(self.tiempoesperamax - self.tiempoespera)
          
 class Medico:
     def __init__(self, dni, horarioinicio, horariofin, presentismo):
@@ -117,7 +118,8 @@ class Hospital:
                     paciente.set_tiempoesperamaximo(240)
 
     def ordenar(self): #en esta función se está ordenando la cola de pacientes en función de la diferencia entre el tiempo de espera y el tiempo máximo de espera, según el método de mergesort
-        
+       elprimero= merge_sort(self.listapaciente)
+       return elprimero
        """ if len(self.listapaciente) > 1:
             medio = int(len(self.listapaciente) / 2)
             izq = self.listapaciente[:medio]
@@ -145,7 +147,7 @@ class Hospital:
                 k += 1
             
         return self.listapaciente[0]"""
-       merge_sort(self.listapaciente)
+       
        
 
     def dyc(self, ordenar): #recibe la lista completa sin los rojos, y llama el ordenar
@@ -161,7 +163,7 @@ class Hospital:
                     j.atender(ordenar)
                     listaespera = listaespera[1:]
 def merge_sort(lista_pacientes):
-    if len(lista_pacientes) > 1:
+    if int (len(lista_pacientes)) > 1:
         medio = int(len(lista_pacientes) / 2)
         izq = lista_pacientes[:medio]
         der = lista_pacientes[medio:]
@@ -170,7 +172,7 @@ def merge_sort(lista_pacientes):
 
         i = j = k = 0
         while i < len(izq) and j < len(der):
-            if izq[i].valor  < der[j].valor :
+            if izq[i]  > der[j] :
                 lista_pacientes[k] = izq[i]
                 i += 1
             else:
