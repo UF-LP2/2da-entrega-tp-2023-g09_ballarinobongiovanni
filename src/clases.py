@@ -31,10 +31,9 @@ class Paciente:
     def set_tiempoesperamaximo(self, tiempoesperamaximo):
         self.tiempoesperamax = tiempoesperamaximo
     def __lt__(self,other):
-         return (self.tiempoespera - self.tiempoesperamax) < (other.tiempoespera - other.tiempoesperamax)
+         return (self.tiempoesperamax - self.tiempoespera ) < (other.tiempoesperamax - other.tiempoespera)
   
-    #def valor(self):
-       # return int(self.tiempoesperamax - self.tiempoespera)
+   
          
 class Medico:
     def __init__(self, dni, horarioinicio, horariofin, presentismo):
@@ -172,7 +171,7 @@ def merge_sort(lista_pacientes):
 
         i = j = k = 0
         while i < len(izq) and j < len(der):
-            if izq[i]  > der[j] :
+            if izq[i]  < der[j] :
                 lista_pacientes[k] = izq[i]
                 i += 1
             else:
