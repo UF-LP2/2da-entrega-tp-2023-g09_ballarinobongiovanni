@@ -22,15 +22,19 @@ class Paciente:
 
     def __init__(self, dni, tiempoespera, tiempoesperamax, enfermedad):
        
-        if enfermedad in Paciente.enfermedades:
-            self.enfermedad = enfermedad
+        
+        self.enfermedad = enfermedad
         self.dni = dni
         self.tiempoespera = tiempoespera
         self.tiempoesperamax = tiempoesperamax
 
     def set_tiempoesperamaximo(self, tiempoesperamaximo):
         self.tiempoesperamax = tiempoesperamaximo
-
+    """def __lt__(self,other):
+         return (self.tiempoespera - self.tiempoesperamax) < (other.tiempoespera - other.tiempoesperamax)"""
+    def valor(self):
+        return int(self.tiempoesperamax - self.tiempoespera)
+         
 class Medico:
     def __init__(self, dni, horarioinicio, horariofin, presentismo):
         self.dni = dni
@@ -54,6 +58,7 @@ class Hospital:
         self.listaamarillo = []
         self.listaverde = []
         self.listaazul = []
+        self.listamedicoshab = []
         self.nombre = nombre
     
     def pacientesarchivo(self):
@@ -69,17 +74,17 @@ class Hospital:
                 self.agregarpaciente(pac)
 
     def medicoshorario(self, horaactual): #retorna una lista
-        listamedicohabilitado = []
+        
 
         for medico in self.listamedicos:
             if medico.horarioinicio <= horaactual and medico.horariofin >= horaactual:
-                listamedicohabilitado.append(medico)
+                self.listamedicoshab.append(medico)
 
-        return listamedicohabilitado
+       
    
     def finalizaciondehorario(self,horaactual): #cuando termina la hora queda habilitado el medico para recibir otro paciente
 
-        for medico in self.medicoshorario(horaactual):
+        for medico in self.listamedicoshab:
             if medico.presentismo == False:
                 medico.set_presentismo(True)
    
@@ -94,6 +99,7 @@ class Hospital:
             for paciente in self.listapaciente:
                 if paciente.enfermedad in (Paciente.enfermedades.politraumatismo, Paciente.enfermedades.coma):
                     self.listarojo.append(paciente)
+                    self.listapaciente.pop(paciente)
                 elif paciente.enfermedad in (Paciente.enfermedades.convulsion, Paciente.enfermedades.hemorragia_dig,Paciente.enfermedades.isquemia):
                     self.listanaranja.append(paciente)
                     paciente.set_tiempoesperamaximo(10)
@@ -112,8 +118,8 @@ class Hospital:
 
     def ordenar(self): #en esta función se está ordenando la cola de pacientes en función de la diferencia entre el tiempo de espera y el tiempo máximo de espera, según el método de mergesort
         
-        if len(self.listapaciente) > 1:
-            medio = len(self.listapaciente) / 2
+       """ if len(self.listapaciente) > 1:
+            medio = int(len(self.listapaciente) / 2)
             izq = self.listapaciente[:medio]
             der = self.listapaciente[medio:]
             self.ordenar(izq)
@@ -137,21 +143,49 @@ class Hospital:
                 self.listapaciente[k] = der[j]
                 j += 1
                 k += 1
-            return self.listapaciente[0]
+            
+        return self.listapaciente[0]"""
+       merge_sort(self.listapaciente)
+       
 
     def dyc(self, ordenar): #recibe la lista completa sin los rojos, y llama el ordenar
         j = 0               #si ponemos los pacientes en hp. listapaciente, hay que sacar la variable
 
-        for j in range(self.listamedicos):
+        for j in self.listamedicoshab :
             if j.presentismo != False:
                 if self.listarojo != None:
                     j.atender(self.listarojo[0])
                     self.listarojo = self.listarojo[1:]
                 else:
-                    pacientemasproximo = ordenar
-                    j.atender(pacientemasproximo)
+                    
+                    j.atender(ordenar)
                     listaespera = listaespera[1:]
+def merge_sort(lista_pacientes):
+    if len(lista_pacientes) > 1:
+        medio = int(len(lista_pacientes) / 2)
+        izq = lista_pacientes[:medio]
+        der = lista_pacientes[medio:]
+        merge_sort(izq)
+        merge_sort(der)
 
+        i = j = k = 0
+        while i < len(izq) and j < len(der):
+            if izq[i].valor  < der[j].valor :
+                lista_pacientes[k] = izq[i]
+                i += 1
+            else:
+                lista_pacientes[k] = der[j]
+                j += 1
+            k += 1
+        while i < len(izq):
+            lista_pacientes[k] = izq[i]
+            i += 1
+            k += 1
+        while j < len(der):
+            lista_pacientes[k] = der[j]
+            j += 1
+            k += 1
+    return lista_pacientes[0]
 """
     def greedy(self, horaactual): #recibe la hora del for 
         j = 0
