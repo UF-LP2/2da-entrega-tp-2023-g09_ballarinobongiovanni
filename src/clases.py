@@ -57,7 +57,7 @@ class Hospital:
         self.nombre = nombre
     
     def pacientesarchivo(self):
-        with open("src/Pacientes.csv",'r') as file :
+        with open("src/Pacientes.csv",'r') as file:
             reader=csv.DictReader(file) #crea un diccionario con el encabezado, es decir que permite recorrer cada lista y ser reconocida por su encabezado
             for row in reader: #almacenamos en cada variable el valor de cada columna
                 Dni= row['dni']
@@ -89,9 +89,9 @@ class Hospital:
     def agregarmedico(self, medico):
         self.listamedicos.append(medico)
 
-    def listado(self,listaespera):
+    def listado(self):
            
-            for paciente in listaespera:
+            for paciente in self.listapaciente:
                 if paciente.enfermedad in (Paciente.enfermedades.politraumatismo, Paciente.enfermedades.coma):
                     self.listarojo.append(paciente)
                 elif paciente.enfermedad in (Paciente.enfermedades.convulsion, Paciente.enfermedades.hemorragia_dig,Paciente.enfermedades.isquemia):
@@ -139,8 +139,8 @@ class Hospital:
                 k += 1
             return self.listapaciente[0]
 
-    def dyc(self, listaespera): #recibe la lista completa sin los rojos , y llama el ordenar
-        j = 0                   #si ponemos los pacientes en hp. listapaciente, hay que sacar la variable
+    def dyc(self, ordenar): #recibe la lista completa sin los rojos, y llama el ordenar
+        j = 0               #si ponemos los pacientes en hp. listapaciente, hay que sacar la variable
 
         for j in range(self.listamedicos):
             if j.presentismo != False:
@@ -148,7 +148,7 @@ class Hospital:
                     j.atender(self.listarojo[0])
                     self.listarojo = self.listarojo[1:]
                 else:
-                    pacientemasproximo = self.ordenar()
+                    pacientemasproximo = ordenar
                     j.atender(pacientemasproximo)
                     listaespera = listaespera[1:]
 
@@ -177,7 +177,6 @@ class Hospital:
                 if self.listaazul != None:
                     j.atender(self.listaazul[0])
                     self.listanaazul = self.listanaazul[1:]
-
-                    
+                 
 """
 
