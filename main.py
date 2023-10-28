@@ -2,6 +2,8 @@ import random
 from src.clases import Paciente
 from clases import Medico
 from src.clases import Hospital
+import tkinter as tk
+
 def main() -> None:
 
   hospital = Hospital("hospital") #tengo que pasarle info
@@ -13,10 +15,19 @@ def main() -> None:
   hospital.pacientesarchivo()
   
   for i in range (24): #empieza en la hora 1 am y suma una hora por pasada 
-    hospital.listado()#tendriamos que ver si los listamos dentro del for
-    hospital.medicoshorario(i)# crea una lista de los medicos habilitados para ese horario
+    hospital.listado() #tendriamos que ver si los listamos dentro del for
+    hospital.medicoshorario(i) #crea una lista de los medicos habilitados para ese horario
     ordenar=hospital.ordenar() #ordena con mergesort
     hospital.dyc(ordenar) #funcion dividir y conquistar
-    hospital.finalizaciondehorario(i) # desocupa los medicos
+    hospital.finalizaciondehorario(i) #desocupa los medicos
+
+  paciente = hospital.ordenar() 
+  ventana = tk.Tk()
+  etiqueta = tk.Label(ventana, text="Paciente: " + paciente, bg="white", fg="black", font=("Arial", 12), width=20, height=2, anchor="center")
+  etiqueta.pack()
+  ventana.mainloop()
+
+
+
 if __name__ == "__main__":
   main()
