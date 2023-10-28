@@ -1,3 +1,4 @@
+
 import random
 from src.clases import Paciente
 from clases import Medico
