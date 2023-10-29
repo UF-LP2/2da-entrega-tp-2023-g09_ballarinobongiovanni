@@ -1,5 +1,5 @@
 from src.clases import Paciente
-#from clases import Medico
+from src.clases import Medico
 from src.clases import Hospital
 
 
@@ -43,4 +43,45 @@ def test_ordenar():
     
     assert (hp.listapaciente[0].tiempoespera, hp.listapaciente[0].tiempoesperamax, hp.listapaciente[0].enfermedad) == (p3.tiempoespera, p3.tiempoesperamax, p3.enfermedad)
 
+"""def test_dyc():
+    hp = Hospital("hospital")
+    p1 = Paciente(dni=4567839, tiempoespera=5, tiempoesperamax=10, enfermedad="Isquemia")
+    p2 = Paciente(dni=4567895, tiempoespera=116, tiempoesperamax=120, enfermedad="Otalgias")
+    p3 = Paciente(dni=4567867, tiempoespera=239, tiempoesperamax=240, enfermedad="no urgencia")
+    p4 = Paciente(dni = 123456789,tiempoespera= 0, tiempoesperamax=0,enfermedad= "Politraumatismo grave")
+    medico_uno = Medico(dni= 45678910,horarioinicio=1,horariofin=10,presentismo=True)
+    medico_dos = Medico(dni=12345678, horarioinicio=9, horariofin=14, presentismo=True)
+    medico_tres = Medico(dni=98765432, horarioinicio=8, horariofin=12, presentismo=True)
+   
+    hp.agregarmedico(medico_uno )
+    hp.agregarmedico(medico_dos )
+    hp.agregarmedico(medico_tres)
+   
+    hp.agregarpaciente(p2)
+    hp.agregarpaciente(p1)
+    hp.agregarpaciente(p3)
+    hp.agregarpaciente(p4)
+   
+    hp.medicoshorario(9)
+    hp.listado()
+    hp.ordenar()
+    hp.dyc()
 
+    assert(hp.listapaciente[0].dni) == (p1.dni)"""
+
+def test_listado():
+    hp = Hospital("hospital")
+    
+    p1 = Paciente(dni=4567839, tiempoespera=5, tiempoesperamax=10, enfermedad="Isquemia")
+    p2 = Paciente(dni=4567895, tiempoespera=116, tiempoesperamax=120, enfermedad="Otalgias")
+    p3 = Paciente(dni=4567867, tiempoespera=239, tiempoesperamax=240, enfermedad="no urgencia")
+    p4 = Paciente(dni=123456789,tiempoespera=0, tiempoesperamax=0,enfermedad="Politraumatismo grave")
+    hp.agregarpaciente(p2)
+    hp.agregarpaciente(p1)
+    hp.agregarpaciente(p3)
+    hp.agregarpaciente(p4)
+
+    hp.listado()
+
+    assert(hp.listarojo[0].dni) == (p4.dni)
+   

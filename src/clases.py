@@ -42,9 +42,8 @@ class Medico:
         self.horariofin = horariofin
         self.presentismo = presentismo #si esta habilitado para atender o esta ocupado
 
-    def atender(self, paciente):
-        print("faltaponeralgo")
-        self.presentismo = False
+    def atender(self, valor):
+        self.presentismo = valor
 
     def set_presentismo(self,valor):
         self.presentismo=valor
@@ -95,21 +94,21 @@ class Hospital:
         self.listamedicos.append(medico)
 
     def listado(self):
-           
-            for paciente in self.listapaciente:
-                if paciente.enfermedad in (Paciente.enfermedades.politraumatismo, Paciente.enfermedades.coma):
+            listapacientescopia = self.listapaciente.copy()
+            for paciente in listapacientescopia:
+                if paciente.enfermedad in (Paciente.enfermedades.politraumatismo.value , Paciente.enfermedades.coma.value) :
                     self.listarojo.append(paciente)
-                    self.listapaciente.pop(paciente)
-                elif paciente.enfermedad in (Paciente.enfermedades.convulsion, Paciente.enfermedades.hemorragia_dig,Paciente.enfermedades.isquemia):
+                    self.listapaciente.remove(paciente)
+                elif paciente.enfermedad in (Paciente.enfermedades.convulsion.value, Paciente.enfermedades.hemorragia_dig.value,Paciente.enfermedades.isquemia.value):
                     self.listanaranja.append(paciente)
                     paciente.set_tiempoesperamaximo(10)
                     #nose si directamente se puede poner paciente.tiempoesperamax = 20 o tengo que hacer set
-                elif paciente.enfermedad in (Paciente.enfermedades.cefalea, Paciente.enfermedades.paresia,
-                                             Paciente.enfermedades.hipertension,Paciente.enfermedades.vertigo,Paciente.enfermedades.sincope, Paciente.enfermedades.urgencia_psi):
+                elif paciente.enfermedad in (Paciente.enfermedades.cefalea.value, Paciente.enfermedades.paresia.value,
+                                             Paciente.enfermedades.hipertension.value,Paciente.enfermedades.vertigo.value,Paciente.enfermedades.sincope.value, Paciente.enfermedades.urgencia_psi.value):
                     self.listaamarillo.append(paciente)
                     paciente.set_tiempoesperamaximo(60)
-                elif paciente.enfermedad in (Paciente.enfermedades.otalgias, Paciente.enfermedades.odontalgia,
-                                             Paciente.enfermedades.dolor_leve, Paciente.enfermedades.traumatismos,Paciente.enfermedades.esguinces):
+                elif paciente.enfermedad in (Paciente.enfermedades.otalgias.value, Paciente.enfermedades.odontalgia.value,
+                                             Paciente.enfermedades.dolor_leve.value, Paciente.enfermedades.traumatismos.value,Paciente.enfermedades.esguinces.value):
                     self.listaverde.append(paciente)
                     paciente.set_tiempoesperamaximo(120)
                 else:
@@ -149,18 +148,22 @@ class Hospital:
        
        
 
-    def dyc(self, ordenar): #recibe la lista completa sin los rojos, y llama el ordenar
+    def dyc(self): #recibe la lista completa sin los rojos, y llama el ordenar
         j = 0               #si ponemos los pacientes en hp. listapaciente, hay que sacar la variable
 
         for j in self.listamedicoshab :
             if j.presentismo != False:
                 if self.listarojo != None:
-                    j.atender(self.listarojo[0])
-                    self.listarojo = self.listarojo[1:]
+                    j.atender(False)
+                    if int(len(self.listarojo)) == 1:
+                        self.listarojo.clear()
+                    else:
+                        self.listarojo = self.listarojo[1:]
+                     
                 else:
                     
-                    j.atender(ordenar)
-                    listaespera = listaespera[1:]
+                    j.atender(False)
+                    self.listapaciente.remove(0)
 def merge_sort(lista_pacientes):
     if int (len(lista_pacientes)) > 1:
         medio = int(len(lista_pacientes) / 2)
