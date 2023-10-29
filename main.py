@@ -6,7 +6,6 @@ from src.clases import Hospital
 import tkinter as tk
 
 def main() -> None:
-  """prueba dendnnndnnnndj"""
   hospital = Hospital("hospital") #tengo que pasarle info
   hospital.agregarmedico(medico_uno = Medico(dni= 45678910,horarioinicio=1,horariofin=5,presentismo=True))
   hospital.agregarmedico(medico_dos = Medico(dni=12345678, horarioinicio=9, horariofin=14, presentismo=True))

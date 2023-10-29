@@ -32,8 +32,8 @@ class Paciente:
         self.tiempoesperamax = tiempoesperamaximo
     def __lt__(self,other):
          return (self.tiempoesperamax - self.tiempoespera ) < (other.tiempoesperamax - other.tiempoespera)
-  
-   
+    
+
          
 class Medico:
     def __init__(self, dni, horarioinicio, horariofin, presentismo):
