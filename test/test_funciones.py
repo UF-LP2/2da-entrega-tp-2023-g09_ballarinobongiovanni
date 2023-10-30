@@ -85,3 +85,18 @@ def test_listado():
 
     assert(hp.listarojo[0].dni) == (p4.dni)
    
+def test_pacientesarchivo(tmp_path):
+    hp = Hospital(nombre = "h")
+    test_dir = tmp_path / "test_data"
+    test_dir.mkdir()
+    test_csv = test_dir / "Pacientes.csv"
+    
+    
+    with open(test_csv, "w") as file:
+        file.write("dni,tiempoespera,tiempoesperamax,enfermedad\n")
+        file.write("123456789, 0, 0, Politraumatismo grave\n")
+        file.write("987654321, 8, 10, Coma\n")
+
+    hp.pacientesarchivo()
+    assert int(len(hp.listapaciente)) > 0
+    
