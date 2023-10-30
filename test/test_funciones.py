@@ -43,7 +43,7 @@ def test_ordenar():
     
     assert (hp.listapaciente[0].tiempoespera, hp.listapaciente[0].tiempoesperamax, hp.listapaciente[0].enfermedad) == (p3.tiempoespera, p3.tiempoesperamax, p3.enfermedad)
 
-"""def test_dyc():
+def test_dyc():
     hp = Hospital("hospital")
     p1 = Paciente(dni=4567839, tiempoespera=5, tiempoesperamax=10, enfermedad="Isquemia")
     p2 = Paciente(dni=4567895, tiempoespera=116, tiempoesperamax=120, enfermedad="Otalgias")
@@ -67,7 +67,7 @@ def test_ordenar():
     hp.ordenar()
     hp.dyc()
 
-    assert(hp.listapaciente[0].dni) == (p1.dni)"""
+    assert(hp.listapaciente[0].dni) == (p1.dni)
 
 def test_listado():
     hp = Hospital("hospital")

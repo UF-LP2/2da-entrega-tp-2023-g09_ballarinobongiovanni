@@ -153,7 +153,7 @@ class Hospital:
 
         for j in self.listamedicoshab :
             if j.presentismo != False:
-                if self.listarojo != None:
+                if int( len(self.listarojo)) != 0:
                     j.atender(False)
                     if int(len(self.listarojo)) == 1:
                         self.listarojo.clear()
@@ -163,7 +163,7 @@ class Hospital:
                 else:
                     
                     j.atender(False)
-                    self.listapaciente.remove(0)
+                    self.listapaciente.pop(0)
 def merge_sort(lista_pacientes):
     if int (len(lista_pacientes)) > 1:
         medio = int(len(lista_pacientes) / 2)
