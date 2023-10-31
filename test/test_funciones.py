@@ -2,7 +2,6 @@ from src.clases import Paciente
 from src.clases import Medico
 from src.clases import Hospital
 
-
 """def lista_de_medicos():
     hp = Hospital("hospital")
     hp.agregarmedico(medico_uno = Medico(dni= 45678910,horarioinicio=1,horariofin=5,presentismo=True))
@@ -35,9 +34,7 @@ def test_ordenar():
     
     hp.agregarpaciente(p2)
     hp.agregarpaciente(p1)
-    hp.agregarpaciente(p3)
-    
-    
+    hp.agregarpaciente(p3)  
     
     hp.ordenar()  
     
@@ -71,7 +68,6 @@ def test_dyc():
 
 def test_listado():
     hp = Hospital("hospital")
-    
     p1 = Paciente(dni=4567839, tiempoespera=5, tiempoesperamax=10, enfermedad="Isquemia")
     p2 = Paciente(dni=4567895, tiempoespera=116, tiempoesperamax=120, enfermedad="Otalgias")
     p3 = Paciente(dni=4567867, tiempoespera=239, tiempoesperamax=240676767, enfermedad="no urgencia")
@@ -86,23 +82,19 @@ def test_listado():
     assert(hp.listarojo[0].dni) == (p4.dni)
     assert(hp.listaazul[0].tiempoesperamax) == 240
    
-def test_pacientesarchivo(tmp_path):#funcion de pytest que genera un directorio temporal
+def test_pacientesarchivo(tmp_path): #funcion de pytest que genera un directorio temporal
     hp = Hospital(nombre = "h")
-    p= tmp_path / "sub" 
+    p = tmp_path / "sub" 
     p.mkdir() 
-    test_csv = p / "Pacientes.csv"#crea un archivo csv
-    
-    
-    with open(test_csv, "w") as file:#escribir el archivo
+    test_csv = p / "Pacientes.csv" #crea un archivo csv
+      
+    with open(test_csv, "w") as file: #escribir el archivo
         file.write("dni,tiempoespera,tiempoesperamax,enfermedad\n")
         file.write("123456789, 0, 0, Politraumatismo grave\n")
         file.write("987654321, 8, 10, Coma\n")
 
     hp.pacientesarchivo()
     assert int(len(hp.listapaciente)) > 0
-
-
-
     
 def test_greedy():
     hp = Hospital("hospital")
@@ -117,8 +109,8 @@ def test_greedy():
     medico_dos = Medico(dni=12345678, horarioinicio=9, horariofin=14, presentismo=True)
     medico_tres = Medico(dni=98765432, horarioinicio=8, horariofin=12, presentismo=True)
    
-    hp.agregarmedico(medico_uno )
-    hp.agregarmedico(medico_dos )
+    hp.agregarmedico(medico_uno)
+    hp.agregarmedico(medico_dos)
     hp.agregarmedico(medico_tres)
    
     hp.agregarpaciente(p2)
@@ -132,5 +124,5 @@ def test_greedy():
     hp.listado()
     hp.greedy()
 
-    assert int(len(hp.listanaranja)) ==1
-    assert int(len(hp.listarojo)) ==0
+    assert int(len(hp.listanaranja)) == 1
+    assert int(len(hp.listarojo)) == 0

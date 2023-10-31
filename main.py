@@ -1,4 +1,3 @@
-
 import random
 from src.clases import Paciente
 from clases import Medico
@@ -17,9 +16,14 @@ def main() -> None:
   for i in range (24): #empieza en la hora 1 am y suma una hora por pasada 
     hospital.listado() #tendriamos que ver si los listamos dentro del for
     hospital.medicoshorario(i) #crea una lista de los medicos habilitados para ese horario
-    ordenar=hospital.ordenar() #ordena con mergesort
+    ordenar = hospital.ordenar() #ordena con mergesort
     hospital.dyc(ordenar) #funcion dividir y conquistar
     hospital.finalizaciondehorario(i) #desocupa los medicos
+
+  pacientes = hospital.agregarpaciente
+  for paciente in pacientes:
+    while True:
+      hospital.aumentartiempodeespera(pacientes)
 
   paciente = hospital.ordenar() 
   ventana = tk.Tk()

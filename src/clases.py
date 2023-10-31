@@ -1,7 +1,6 @@
 import random
 import time
 
-
 from enum import Enum
 import csv
 class Paciente:
