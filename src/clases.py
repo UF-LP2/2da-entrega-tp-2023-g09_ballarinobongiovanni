@@ -1,3 +1,7 @@
+import random
+import time
+
+
 from enum import Enum
 import csv
 class Paciente:
@@ -20,9 +24,7 @@ class Paciente:
          esguinces = "Esguinces"
          no_urgencia = "no urgencia"
 
-    def __init__(self, dni, tiempoespera, tiempoesperamax, enfermedad):
-       
-        
+    def __init__(self, dni, tiempoespera, tiempoesperamax, enfermedad):        
         self.enfermedad = enfermedad
         self.dni = dni
         self.tiempoespera = tiempoespera
@@ -30,10 +32,9 @@ class Paciente:
 
     def set_tiempoesperamaximo(self, tiempoesperamaximo):
         self.tiempoesperamax = tiempoesperamaximo
+
     def __lt__(self,other):
          return (self.tiempoesperamax - self.tiempoespera ) < (other.tiempoesperamax - other.tiempoespera)
-    
-
          
 class Medico:
     def __init__(self, dni, horarioinicio, horariofin, presentismo):
@@ -72,23 +73,23 @@ class Hospital:
                 pac = Paciente(Dni, tiempoespe, tiempomax, enfermed)
                 self.agregarpaciente(pac)
 
-    def medicoshorario(self, horaactual): #retorna una lista
-        
+    def aumentartiempodeespera(pacientes): #aumenta el tiempo de espera de los pacientes
+        for paciente in pacientes:
+            paciente.tiempoespera += 1 #aumenta un segundo
 
+    def medicoshorario(self, horaactual): #retorna una lista       
         for medico in self.listamedicos:
             if medico.horarioinicio <= horaactual and medico.horariofin >= horaactual:
                 self.listamedicoshab.append(medico)
 
-       
-   
     def finalizaciondehorario(self,horaactual): #cuando termina la hora queda habilitado el medico para recibir otro paciente
-
         for medico in self.listamedicoshab:
             if medico.presentismo == False:
                 medico.set_presentismo(True)
    
     def agregarpaciente(self, paciente):
-        self.listapaciente.append(paciente)
+        posicion = random.randint(0, len(paciente))
+        self.listapaciente.append(paciente, posicion)
 
     def agregarmedico(self, medico):
         self.listamedicos.append(medico)
@@ -116,8 +117,9 @@ class Hospital:
                     paciente.set_tiempoesperamaximo(240)
 
     def ordenar(self): #en esta función se está ordenando la cola de pacientes en función de la diferencia entre el tiempo de espera y el tiempo máximo de espera, según el método de mergesort
-       elprimero= merge_sort(self.listapaciente)
+       elprimero = merge_sort(self.listapaciente)
        return elprimero
+    
        """ if len(self.listapaciente) > 1:
             medio = int(len(self.listapaciente) / 2)
             izq = self.listapaciente[:medio]
@@ -146,12 +148,10 @@ class Hospital:
             
         return self.listapaciente[0]"""
        
-       
-
     def dyc(self): #recibe la lista completa sin los rojos, y llama el ordenar
-        j = 0               #si ponemos los pacientes en hp. listapaciente, hay que sacar la variable
+        j = 0      #si ponemos los pacientes en hp. listapaciente, hay que sacar la variable
 
-        for j in self.listamedicoshab :
+        for j in self.listamedicoshab:
             if j.presentismo != False:
                 if int( len(self.listarojo)) != 0:
                     j.atender(False)
@@ -160,11 +160,9 @@ class Hospital:
                     else:
                         self.listarojo.pop(0)
                      
-                else:
-                    
+                else:                   
                     j.atender(False)
                     self.listapaciente.pop(0)
-
 
     def greedy(self): #recibe la hora del for 
         j = 0
@@ -190,7 +188,6 @@ class Hospital:
                 elif int(len(self.listaazul)) != 0:
                     j.atender(self.listaazul[0])
                     self.listaazul.pop(0)
-
 
 def merge_sort(lista_pacientes):
     if int (len(lista_pacientes)) > 1:
@@ -218,5 +215,4 @@ def merge_sort(lista_pacientes):
             j += 1
             k += 1
     return lista_pacientes[0]
-
 
