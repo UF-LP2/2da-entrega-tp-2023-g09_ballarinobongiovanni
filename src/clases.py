@@ -87,8 +87,7 @@ class Hospital:
                 medico.set_presentismo(True)
    
     def agregarpaciente(self, paciente):
-        posicion = random.randint(0, len(paciente))
-        self.listapaciente.append(paciente, posicion)
+        self.listapaciente.append(paciente)
 
     def agregarmedico(self, medico):
         self.listamedicos.append(medico)
