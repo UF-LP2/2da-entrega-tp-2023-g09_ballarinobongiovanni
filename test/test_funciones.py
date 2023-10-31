@@ -86,20 +86,23 @@ def test_listado():
     assert(hp.listarojo[0].dni) == (p4.dni)
     assert(hp.listaazul[0].tiempoesperamax) == 240
    
-def test_pacientesarchivo(tmp_path):
+def test_pacientesarchivo(tmp_path):#funcion de pytest que genera un directorio temporal
     hp = Hospital(nombre = "h")
-    test_dir = tmp_path / "test_data"
-    test_dir.mkdir()
-    test_csv = test_dir / "Pacientes.csv"
+    p= tmp_path / "sub" 
+    p.mkdir() 
+    test_csv = p / "Pacientes.csv"#crea un archivo csv
     
     
-    with open(test_csv, "w") as file:
+    with open(test_csv, "w") as file:#escribir el archivo
         file.write("dni,tiempoespera,tiempoesperamax,enfermedad\n")
         file.write("123456789, 0, 0, Politraumatismo grave\n")
         file.write("987654321, 8, 10, Coma\n")
 
     hp.pacientesarchivo()
     assert int(len(hp.listapaciente)) > 0
+
+
+
     
 def test_greedy():
     hp = Hospital("hospital")
