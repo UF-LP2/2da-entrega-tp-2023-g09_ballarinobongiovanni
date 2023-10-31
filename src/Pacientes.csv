@@ -1,6 +1,6 @@
 dni,tiempoespera,tiempoesperamax,enfermedad
 123456789, 0, 0, Politraumatismo grave
-987654321, 8, 10, Coma
+987654321, 0, 0, Coma
 234567890, 20, 10, Convulsiones
 345678901, 12, 10, Hemorragia digestiva
 567890123, 18, 10, Isquemia
@@ -16,7 +16,7 @@ dni,tiempoespera,tiempoesperamax,enfermedad
 912345678, 10, 120, Traumatismos y esguinces
 543210987, 17, 240, No urgente 
 654321098, 0, 0, Politraumatismo grave
-765432109, 8, 10, Coma
+765432109, 0, 0, Coma
 876543210, 23, 10, Convulsiones
 987654321, 12, 10, Hemorragia digestiva
 234567890, 15, 10, Isquemia
@@ -31,7 +31,7 @@ dni,tiempoespera,tiempoesperamax,enfermedad
 567891234, 22, 120, Dolores inespecíficos leves
 678912345, 13, 120, Traumatismos y esguinces
 789123456, 0, 0, Politraumatismo grave
-891234567, 9, 10, Coma
+891234567, 0, 0, Coma
 912345678, 23, 10, Convulsiones
 543210987, 14, 10, Hemorragia digestiva
 654321098, 19, 10, Isquemia

@@ -158,12 +158,40 @@ class Hospital:
                     if int(len(self.listarojo)) == 1:
                         self.listarojo.clear()
                     else:
-                        self.listarojo = self.listarojo[1:]
+                        self.listarojo.pop(0)
                      
                 else:
                     
                     j.atender(False)
                     self.listapaciente.pop(0)
+
+
+    def greedy(self): #recibe la hora del for 
+        j = 0
+
+        for j in self.listamedicoshab:
+            if j.presentismo != False:
+                if int(len(self.listarojo)) != 0:
+                    j.atender(False)
+                    self.listarojo.pop(0) 
+
+                elif int(len(self.listanaranja)) != 0:
+                    j.atender(False)
+                    self.listanaranja.pop(0) 
+
+                elif int(len(self.listaamarillo)) != 0:
+                    j.atender(False)
+                    self.listaamarillo.pop(0) 
+                
+                elif int(len(self.listaverde)) != 0:
+                    j.atender(False)
+                    self.listaverde.pop(0) 
+
+                elif int(len(self.listaazul)) != 0:
+                    j.atender(self.listaazul[0])
+                    self.listaazul.pop(0)
+
+
 def merge_sort(lista_pacientes):
     if int (len(lista_pacientes)) > 1:
         medio = int(len(lista_pacientes) / 2)
@@ -190,31 +218,5 @@ def merge_sort(lista_pacientes):
             j += 1
             k += 1
     return lista_pacientes[0]
-"""
-    def greedy(self, horaactual): #recibe la hora del for 
-        j = 0
 
-        for j in (self.medicoshorario(horaactual)):
-            if j.capacidad != False:
-                if self.listarojo != None:
-                    j.atender(self.listarojo[0])
-                    self.listarojo = self.listarojo[1:] #por ahi hay que hacerlo con get y set
-
-                if self.listanaranja != None:
-                    j.atender(self.listanaranja[0])
-                    self.listanaranja = self.listanaranja[1:]
-
-                if self.listaamarillo != None:
-                    j.atender(self.listaamarillo[0])
-                    self.listaamarillo = self.listaamarillo[1:]
-                
-                if self.listaverde != None:
-                    j.atender(self.listaverde[0])
-                    self.listaverde = self.listaverde[1:]
-
-                if self.listaazul != None:
-                    j.atender(self.listaazul[0])
-                    self.listanaazul = self.listanaazul[1:]
-                 
-"""
 

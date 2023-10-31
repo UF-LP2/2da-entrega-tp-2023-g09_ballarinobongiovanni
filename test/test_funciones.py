@@ -74,7 +74,7 @@ def test_listado():
     
     p1 = Paciente(dni=4567839, tiempoespera=5, tiempoesperamax=10, enfermedad="Isquemia")
     p2 = Paciente(dni=4567895, tiempoespera=116, tiempoesperamax=120, enfermedad="Otalgias")
-    p3 = Paciente(dni=4567867, tiempoespera=239, tiempoesperamax=240, enfermedad="no urgencia")
+    p3 = Paciente(dni=4567867, tiempoespera=239, tiempoesperamax=240676767, enfermedad="no urgencia")
     p4 = Paciente(dni=123456789,tiempoespera=0, tiempoesperamax=0,enfermedad="Politraumatismo grave")
     hp.agregarpaciente(p2)
     hp.agregarpaciente(p1)
@@ -84,6 +84,7 @@ def test_listado():
     hp.listado()
 
     assert(hp.listarojo[0].dni) == (p4.dni)
+    assert(hp.listaazul[0].tiempoesperamax) == 240
    
 def test_pacientesarchivo(tmp_path):
     hp = Hospital(nombre = "h")
@@ -100,3 +101,33 @@ def test_pacientesarchivo(tmp_path):
     hp.pacientesarchivo()
     assert int(len(hp.listapaciente)) > 0
     
+def test_greedy():
+    hp = Hospital("hospital")
+    p1 = Paciente(dni=4567839, tiempoespera=5, tiempoesperamax=10, enfermedad="Isquemia")
+    p2 = Paciente(dni=4567895, tiempoespera=116, tiempoesperamax=120, enfermedad="Otalgias")
+    p3 = Paciente(dni=4567867, tiempoespera=239, tiempoesperamax=240, enfermedad="no urgencia")
+    p4 = Paciente(dni = 123456789,tiempoespera= 0, tiempoesperamax=0,enfermedad= "Politraumatismo grave")
+    p5= Paciente(dni = 891234567,tiempoespera=0, tiempoesperamax=12232323,enfermedad="Coma")
+    p6 = Paciente(dni=912345678, tiempoespera=0, tiempoesperamax=10, enfermedad="Convulsiones")
+
+    medico_uno = Medico(dni= 45678910,horarioinicio=1,horariofin=10,presentismo=True)
+    medico_dos = Medico(dni=12345678, horarioinicio=9, horariofin=14, presentismo=True)
+    medico_tres = Medico(dni=98765432, horarioinicio=8, horariofin=12, presentismo=True)
+   
+    hp.agregarmedico(medico_uno )
+    hp.agregarmedico(medico_dos )
+    hp.agregarmedico(medico_tres)
+   
+    hp.agregarpaciente(p2)
+    hp.agregarpaciente(p1)
+    hp.agregarpaciente(p3)
+    hp.agregarpaciente(p4)
+    hp.agregarpaciente(p5)
+    hp.agregarpaciente(p6)
+
+    hp.medicoshorario(9)
+    hp.listado()
+    hp.greedy()
+
+    assert int(len(hp.listanaranja)) ==1
+    assert int(len(hp.listarojo)) ==0
