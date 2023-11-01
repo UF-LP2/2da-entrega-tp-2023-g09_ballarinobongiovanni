@@ -71,6 +71,20 @@ class Hospital:
 
                 pac = Paciente(Dni, tiempoespe, tiempomax, enfermed)
                 self.agregarpaciente(pac)
+                #self.print_file() esto seria solo si queres agregar un paciente nuevo
+
+    def print_file(self): 
+        with open("src/Pacientes.csv") as file: 
+            writer=csv.writer(file) 
+            for row in writer: 
+                writer.writerow(row)
+
+                dni = int(input("Ingrese el dni del paciente: "))
+                tiempoespera = int(input("Ingrese el tiempo del paciente: "))
+                tiempomax = int(input("Ingrese el tiempo del paciente: "))
+                enfermedad = input("Ingrese la enfermedad del paciente en minutos: ")
+                pac = Paciente(dni, tiempoespera, tiempomax, enfermedad)
+                self.agregarpaciente(pac)
 
     def aumentartiempodeespera(pacientes): #aumenta el tiempo de espera de los pacientes
         for paciente in pacientes:
