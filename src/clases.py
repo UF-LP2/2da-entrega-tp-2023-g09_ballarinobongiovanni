@@ -35,6 +35,11 @@ class Paciente:
 
     def __lt__(self,other):
          return (self.tiempoesperamax - self.tiempoespera ) < (other.tiempoesperamax - other.tiempoespera)
+
+    def set_tiempoespera(self,tiempoespera):
+        self.tiempoespera= tiempoespera
+    def get_tiempoespera(self):
+        return self.tiempoespera
          
 class Medico:
     def __init__(self, dni, horarioinicio, horariofin, presentismo):
@@ -66,8 +71,8 @@ class Hospital:
             reader=csv.DictReader(file) #crea un diccionario con el encabezado, es decir que permite recorrer cada lista y ser reconocida por su encabezado
             for row in reader: #almacenamos en cada variable el valor de cada columna
                 Dni= row['dni']
-                tiempoespe = row['tiempoespera']
-                tiempomax = row['tiempoesperamax']
+                tiempoespe = int(row['tiempoespera'])
+                tiempomax = int(row['tiempoesperamax'])
                 enfermed = row ['enfermedad']
 
                 pac = Paciente(Dni, tiempoespe, tiempomax, enfermed)
@@ -87,9 +92,9 @@ class Hospital:
                 pac = Paciente(dni, tiempoespera, tiempomax, enfermedad)
                 self.agregarpaciente(pac)
 
-    def aumentartiempodeespera(pacientes): #aumenta el tiempo de espera de los pacientes
-        for paciente in pacientes:
-            paciente.tiempoespera += 1 #aumenta un segundo
+    def aumentartiempodeespera(self): #aumenta el tiempo de espera de los pacientes
+        for paciente in self.listapaciente :
+            paciente.set_tiempoespera(paciente.get_tiempoespera() + 1 ) #aumenta el tiempo
 
     def medicoshorario(self, horaactual): #retorna una lista       
         for medico in self.listamedicos:
@@ -130,7 +135,9 @@ class Hospital:
                     paciente.set_tiempoesperamaximo(240)
 
     def ordenar(self): #en esta función se está ordenando la cola de pacientes en función de la diferencia entre el tiempo de espera y el tiempo máximo de espera, según el método de mergesort
-       elprimero = merge_sort(self.listapaciente)
+     
+       self.listapaciente = merge_sort(self.listapaciente)  # Ordena la lista
+       elprimero = self.listapaciente[0]  # Accede al primer elemento
        return elprimero
     
        """ if len(self.listapaciente) > 1:
@@ -246,6 +253,6 @@ def merge_sort(lista_pacientes):
             lista_pacientes[k] = der[j]
             j += 1
             k += 1
-    return lista_pacientes[0]
+    return lista_pacientes
 
   

@@ -1,16 +1,16 @@
 dni,tiempoespera,tiempoesperamax,enfermedad
-123456789, 0, 0, Politraumatismo grave
-987654321, 0, 0, Coma
-234567890, 20, 10, Convulsiones
-345678901, 12, 10, Hemorragia digestiva
-567890123, 18, 10, Isquemia
-678901234, 9, 60, Cefalea brusca
-789012345, 14, 60, Paresia
-890123456, 22, 60, Hipertensión arterial
-345678912, 11, 60, Vértigo con afectación vegetativa
-456789123, 16, 60, Síncope
-567891234, 13, 60, Urgencias psiquiátricas
-678912345, 21, 120, Otalgias
+123456789,0,0, Politraumatismo grave
+987654321,0,0, Coma
+234567890,0,10, Convulsiones
+345678901,0,10, Hemorragia digestiva
+567890123,0,10, Isquemia
+678901234,0,60, Cefalea brusca
+789012345,0,60, Paresia
+890123456,0,60, Hipertensión arterial
+345678912,0,60, Vértigo con afectación vegetativa
+456789123,0,60, Síncope
+567891234,0,60, Urgencias psiquiátricas
+678912345,0,120, Otalgias
 789123456, 7, 120, Odontalgias
 891234567, 19, 120, Dolores inespecíficos leves
 912345678, 10, 120, Traumatismos y esguinces
@@ -39,6 +39,7 @@ dni,tiempoespera,tiempoesperamax,enfermedad
 876543210, 16, 60, Paresia
 987654321, 21, 60, Hipertensión arterial
 234567890, 11, 60, Vértigo con afectación vegetativa
+
 
 
 
