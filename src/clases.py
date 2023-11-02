@@ -1,5 +1,6 @@
 import random
 import time
+import tkinter as tk
 
 from enum import Enum
 import csv
@@ -201,6 +202,25 @@ class Hospital:
                     j.atender(self.listaazul[0])
                     self.listaazul.pop(0)
 
+    """def interfaz(self):
+        paciente = self.ordenar() 
+        ventana = tk.Tk()
+        etiqueta = tk.Label(ventana, text="Paciente: " + paciente, bg="white", fg="black", font=("Arial", 12), width=20, height=2, anchor="center")
+        etiqueta.pack()
+        ventana.mainloop()
+
+        lista = merge_sort()
+        ventana1 = tk.Tk()
+        #creo un nuevo botón
+        etiqueta2 = tk.Button(ventana1, text="Lista de pacientes: " + lista, bg="white", fg="black", font=("Arial", 12), width=20, height=2, anchor="center")
+        etiqueta2.pack() 
+
+        ventana1.destroy()
+        #botón para cerrar la ventana
+        cerrar_boton = tk.Button(ventana1, text="Cerrar Ventana")
+        cerrar_boton.pack() 
+        ventana1.mainloop()"""
+
 def merge_sort(lista_pacientes):
     if int (len(lista_pacientes)) > 1:
         medio = int(len(lista_pacientes) / 2)
@@ -228,3 +248,4 @@ def merge_sort(lista_pacientes):
             k += 1
     return lista_pacientes[0]
 
+  

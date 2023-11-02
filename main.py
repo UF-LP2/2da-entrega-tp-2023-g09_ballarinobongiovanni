@@ -2,7 +2,6 @@ import random
 from src.clases import Paciente
 from clases import Medico
 from src.clases import Hospital
-import tkinter as tk
 
 def main() -> None:
   hospital = Hospital("hospital") #tengo que pasarle info
@@ -19,17 +18,12 @@ def main() -> None:
     ordenar = hospital.ordenar() #ordena con mergesort
     hospital.dyc(ordenar) #funcion dividir y conquistar
     hospital.finalizaciondehorario(i) #desocupa los medicos
+    #hospital.interfaz()
 
   pacientes = hospital.agregarpaciente
   for paciente in pacientes:
     while True:
       hospital.aumentartiempodeespera(pacientes)
-
-  paciente = hospital.ordenar() 
-  ventana = tk.Tk()
-  etiqueta = tk.Label(ventana, text="Paciente: " + paciente, bg="white", fg="black", font=("Arial", 12), width=20, height=2, anchor="center")
-  etiqueta.pack()
-  ventana.mainloop()
 
 
 if __name__ == "__main__":
