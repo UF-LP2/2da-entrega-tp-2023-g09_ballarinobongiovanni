@@ -1,6 +1,5 @@
-import random
-import time
-import tkinter as tk
+
+#import tkinter as tk
 
 from enum import Enum
 import csv
