@@ -1,44 +1,44 @@
 dni,tiempoespera,tiempoesperamax,enfermedad
-123456789,0,0, Politraumatismo grave
-987654321,0,0, Coma
-234567890,0,10, Convulsiones
-345678901,0,10, Hemorragia digestiva
-567890123,0,10, Isquemia
-678901234,0,60, Cefalea brusca
-789012345,0,60, Paresia
-890123456,0,60, Hipertensión arterial
-345678912,0,60, Vértigo con afectación vegetativa
-456789123,0,60, Síncope
-567891234,0,60, Urgencias psiquiátricas
-678912345,0,120, Otalgias
-789123456, 7, 120, Odontalgias
-891234567, 19, 120, Dolores inespecíficos leves
-912345678, 10, 120, Traumatismos y esguinces
-543210987, 17, 240, No urgente 
-654321098, 0, 0, Politraumatismo grave
-765432109, 0, 0, Coma
-876543210, 23, 10, Convulsiones
-987654321, 12, 10, Hemorragia digestiva
-234567890, 15, 10, Isquemia
-345678901, 9, 60, Cefalea brusca
-456789012, 19, 60, Paresia
-567890123, 11, 60, Hipertensión arterial
-678901234, 16, 60, Vértigo con afectación vegetativa
-789012345, 20, 60, Síncope
-890123456, 15, 60, Urgencias psiquiátricas
-345678912, 18, 120, Otalgias
-456789123, 12, 120, Odontalgias
-567891234, 22, 120, Dolores inespecíficos leves
-678912345, 13, 120, Traumatismos y esguinces
-789123456, 0, 0, Politraumatismo grave
-891234567, 0, 0, Coma
-912345678, 23, 10, Convulsiones
-543210987, 14, 10, Hemorragia digestiva
-654321098, 19, 10, Isquemia
-765432109, 10, 60, Cefalea brusca
-876543210, 16, 60, Paresia
-987654321, 21, 60, Hipertensión arterial
-234567890, 11, 60, Vértigo con afectación vegetativa
+123456789,0,0,Politraumatismo grave
+987654321,0,0,Coma
+234567890,0,10,Convulsiones
+345678901,0,10,Hemorragia digestiva
+567890123,0,10,Isquemia
+678901234,0,60,Cefalea brusca
+789012345,0,60,Paresia
+890123456,0,60,Hipertensión arterial
+345678912,0,60,Vértigo con afectación vegetativa
+456789123,0,60,Síncope
+567891234,0,60,Urgencias psiquiátricas
+678912345,0,120,Otalgias
+789123456,0,120,Odontalgias
+891234567,0,120,Dolores inespecíficos leves
+912345678,0,120,Traumatismos y esguinces
+543210987,0,240,No urgente 
+654321098,0,0,Politraumatismo grave
+765432109,0,0,Coma
+876543210,0,10,Convulsiones
+987654321,0,10,Hemorragia digestiva
+234567890,0,10,Isquemia
+345678901,0,60,Cefalea brusca
+456789012,0,60,Paresia
+567890123,0,60,Hipertensión arterial
+678901234,0,60,Vértigo con afectación vegetativa
+789012345,0,60,Síncope
+890123456,0,60,Urgencias psiquiátricas
+345678912,0,120,Otalgias
+456789123,0,120,Odontalgias
+567891234,0,120,Dolores inespecíficos leves
+678912345,0,120,Traumatismos y esguinces
+789123456,0,0,Politraumatismo grave
+891234567,0,0,Coma
+912345678,0,10,Convulsiones
+543210987,0,10,Hemorragia digestiva
+654321098,0,10,Isquemia
+765432109,0,60,Cefalea brusca
+876543210,0,60,Paresia
+987654321,0,60,Hipertensión arterial
+234567890,0,60,Vértigo con afectación vegetativa
 
 
 

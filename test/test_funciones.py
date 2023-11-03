@@ -126,6 +126,7 @@ def test_greedy():
 
     assert int(len(hp.listanaranja)) == 1
     assert int(len(hp.listarojo)) == 0
+    
 def test_aumentotiempo():
     hp = Hospital("hospital")
     p1 = Paciente(dni=4567839, tiempoespera=5, tiempoesperamax=10, enfermedad="Isquemia")

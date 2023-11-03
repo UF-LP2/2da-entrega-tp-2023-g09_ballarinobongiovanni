@@ -26,8 +26,6 @@ def main() -> None:
     #hospital.interfaz()
     hospital.aumentartiempodeespera()
   
-  
-
 
 if __name__ == "__main__":
   main()

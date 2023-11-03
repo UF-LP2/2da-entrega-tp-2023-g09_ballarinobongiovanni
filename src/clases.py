@@ -36,7 +36,8 @@ class Paciente:
          return (self.tiempoesperamax - self.tiempoespera ) < (other.tiempoesperamax - other.tiempoespera)
 
     def set_tiempoespera(self,tiempoespera):
-        self.tiempoespera= tiempoespera
+        self.tiempoespera = tiempoespera
+
     def get_tiempoespera(self):
         return self.tiempoespera
          
@@ -51,7 +52,7 @@ class Medico:
         self.presentismo = valor
 
     def set_presentismo(self,valor):
-        self.presentismo=valor
+        self.presentismo = valor
 
 class Hospital:
     def __init__(self, nombre):
@@ -92,7 +93,7 @@ class Hospital:
                 self.agregarpaciente(pac)
 
     def aumentartiempodeespera(self): #aumenta el tiempo de espera de los pacientes
-        for paciente in self.listapaciente :
+        for paciente in self.listapaciente:
             paciente.set_tiempoespera(paciente.get_tiempoespera() + 1 ) #aumenta el tiempo
 
     def medicoshorario(self, horaactual): #retorna una lista       
@@ -135,8 +136,8 @@ class Hospital:
 
     def ordenar(self): #en esta función se está ordenando la cola de pacientes en función de la diferencia entre el tiempo de espera y el tiempo máximo de espera, según el método de mergesort
      
-       self.listapaciente = merge_sort(self.listapaciente)  # Ordena la lista
-       elprimero = self.listapaciente[0]  # Accede al primer elemento
+       self.listapaciente = merge_sort(self.listapaciente) #ordena la lista
+       elprimero = self.listapaciente[0] #accede al primer elemento
        return elprimero
     
        """ if len(self.listapaciente) > 1:
