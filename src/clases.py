@@ -32,7 +32,7 @@ class Paciente:
     def set_tiempoesperamaximo(self, tiempoesperamaximo):
         self.tiempoesperamax = tiempoesperamaximo
 
-    def __lt__(self,other):
+    def __lt__(self,other):#sobrecarga del < , retorna true o false
          return (self.tiempoesperamax - self.tiempoespera ) < (other.tiempoesperamax - other.tiempoespera)
 
     def set_tiempoespera(self,tiempoespera):
@@ -64,6 +64,7 @@ class Hospital:
         self.listaverde = []
         self.listaazul = []
         self.listamedicoshab = []
+        self.listaarchivo = []
         self.nombre = nombre
     
     def pacientesarchivo(self):
@@ -76,7 +77,7 @@ class Hospital:
                 enfermed = row ['enfermedad']
 
                 pac = Paciente(Dni, tiempoespe, tiempomax, enfermed)
-                self.agregarpaciente(pac)
+                self.listaarchivo.append(pac)
                 #self.print_file() esto seria solo si queres agregar un paciente nuevo
 
     def print_file(self): 
@@ -94,7 +95,7 @@ class Hospital:
 
     def aumentartiempodeespera(self): #aumenta el tiempo de espera de los pacientes
         for paciente in self.listapaciente:
-            paciente.set_tiempoespera(paciente.get_tiempoespera() + 1 ) #aumenta el tiempo
+            paciente.set_tiempoespera(paciente.get_tiempoespera() + 3 ) #aumenta el tiempo
 
     def medicoshorario(self, horaactual): #retorna una lista       
         for medico in self.listamedicos:
@@ -112,6 +113,32 @@ class Hospital:
     def agregarmedico(self, medico):
         self.listamedicos.append(medico)
 
+    def dearchivo_a_paciente(self,valor):# funcion que pasa de la lista archivos a la lista paciente, los pacientes.
+                                    #se realiza esto para simular que ingresan pacientes en el medio del programa
+        if valor == 0:
+            h=0 
+            while h < 8:
+                self.agregarpaciente(self.listaarchivo[0])
+                self.listaarchivo.pop(0)
+                h+=1
+            return True
+        elif valor ==7 :
+            h=0 
+            while h < 20:
+                self.agregarpaciente(self.listaarchivo[0])
+                self.listaarchivo.pop(0)
+                h+=1
+            return True
+        elif valor == 15:
+             h=0 
+             while h < 12:
+                self.agregarpaciente(self.listaarchivo[0])
+                self.listaarchivo.pop(0)
+                h+=1
+             return True
+        else:
+            return False
+
     def listado(self):
             listapacientescopia = self.listapaciente.copy()
             for paciente in listapacientescopia:
@@ -121,7 +148,7 @@ class Hospital:
                 elif paciente.enfermedad in (Paciente.enfermedades.convulsion.value, Paciente.enfermedades.hemorragia_dig.value,Paciente.enfermedades.isquemia.value):
                     self.listanaranja.append(paciente)
                     paciente.set_tiempoesperamaximo(10)
-                    #nose si directamente se puede poner paciente.tiempoesperamax = 20 o tengo que hacer set
+                    
                 elif paciente.enfermedad in (Paciente.enfermedades.cefalea.value, Paciente.enfermedades.paresia.value,
                                              Paciente.enfermedades.hipertension.value,Paciente.enfermedades.vertigo.value,Paciente.enfermedades.sincope.value, Paciente.enfermedades.urgencia_psi.value):
                     self.listaamarillo.append(paciente)
@@ -137,6 +164,7 @@ class Hospital:
     def ordenar(self): #en esta función se está ordenando la cola de pacientes en función de la diferencia entre el tiempo de espera y el tiempo máximo de espera, según el método de mergesort
      
        self.listapaciente = merge_sort(self.listapaciente) #ordena la lista
+    
        elprimero = self.listapaciente[0] #accede al primer elemento
        return elprimero
     
@@ -170,7 +198,7 @@ class Hospital:
        
     def dyc(self): #recibe la lista completa sin los rojos, y llama el ordenar
         j = 0      #si ponemos los pacientes en hp. listapaciente, hay que sacar la variable
-
+       
         for j in self.listamedicoshab:
             if j.presentismo != False:
                 if int( len(self.listarojo)) != 0:
@@ -180,9 +208,10 @@ class Hospital:
                     else:
                         self.listarojo.pop(0)
                      
-                else:                   
+                elif self.listapaciente:               
                     j.atender(False)
                     self.listapaciente.pop(0)
+               
 
     def greedy(self): #recibe la hora del for 
         j = 0
@@ -208,6 +237,15 @@ class Hospital:
                 elif int(len(self.listaazul)) != 0:
                     j.atender(self.listaazul[0])
                     self.listaazul.pop(0)
+    def pacientefallecido(self):
+        j=0
+        if len(self.listapaciente)==0:
+            return
+        for paciente in self.listapaciente:
+            if paciente.tiempoespera == paciente.tiempoesperamax :
+                print("el paciente",paciente.dni," con enfermedad ",paciente.enfermedad,"a fallecido")
+                self.listapaciente.remove(paciente)
+               
 
     """def interfaz(self):
         paciente = self.ordenar() 
@@ -227,7 +265,7 @@ class Hospital:
         cerrar_boton = tk.Button(ventana1, text="Cerrar Ventana")
         cerrar_boton.pack() 
         ventana1.mainloop()"""
-
+#fuera de la clase 
 def merge_sort(lista_pacientes):
     if int (len(lista_pacientes)) > 1:
         medio = int(len(lista_pacientes) / 2)

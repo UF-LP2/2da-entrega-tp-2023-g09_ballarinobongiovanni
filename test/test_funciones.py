@@ -94,7 +94,7 @@ def test_pacientesarchivo(tmp_path): #funcion de pytest que genera un directorio
         file.write("987654321, 8, 10, Coma\n")
 
     hp.pacientesarchivo()
-    assert int(len(hp.listapaciente)) > 0
+    assert int(len(hp.listaarchivo)) > 0
     
 def test_greedy():
     hp = Hospital("hospital")
@@ -140,4 +140,3 @@ def test_aumentotiempo():
     assert p2.tiempoespera == 117
     assert p1.tiempoespera == 6
     assert p3.tiempoespera == 240
-    
