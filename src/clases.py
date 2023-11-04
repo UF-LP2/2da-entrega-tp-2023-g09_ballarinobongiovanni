@@ -1,5 +1,7 @@
-
-#import tkinter as tk
+import tkinter as tk
+from tkinter import ttk
+from tkinter import *
+from tkinter import messagebox
 
 from enum import Enum
 import csv
@@ -12,13 +14,13 @@ class Paciente:
          isquemia = "Isquemia"
          cefalea = "Cefalea brusca"
          paresia = "Paresia"
-         hipertension = "Hipertensión arterial"
-         vertigo = "Vértigo con afectación vegetativa"
-         sincope = "Síncope"
-         urgencia_psi = "Urgencias psiquiátricas"
+         hipertension = "Hipertension arterial"
+         vertigo = "Vertigo con afectacion vegetativa"
+         sincope = "Sincope"
+         urgencia_psi = "Urgencias psiquiatricas"
          otalgias = "Otalgias"
          odontalgia = "Odontalgias"
-         dolor_leve = "Dolores inespecíficos leves"
+         dolor_leve = "Dolores inespecificos leves"
          traumatismos = "Traumatismos"
          esguinces = "Esguinces"
          no_urgencia = "no urgencia"
@@ -32,7 +34,7 @@ class Paciente:
     def set_tiempoesperamaximo(self, tiempoesperamaximo):
         self.tiempoesperamax = tiempoesperamaximo
 
-    def __lt__(self,other):#sobrecarga del < , retorna true o false
+    def __lt__(self,other): #sobrecarga del < , retorna true o false
          return (self.tiempoesperamax - self.tiempoespera ) < (other.tiempoesperamax - other.tiempoespera)
 
     def set_tiempoespera(self,tiempoespera):
@@ -66,12 +68,80 @@ class Hospital:
         self.listamedicoshab = []
         self.listaarchivo = []
         self.nombre = nombre
-    
+
+        ventana = Tk()
+        ventana.geometry('400x400')
+        #ventana.config(bg='white')
+        ventana.title("Interfaz")
+
+        self.label1=Label(ventana, text="Listar:")
+        self.label1.place(x=40, y=30)
+
+        self.text1=Entry(ventana)
+        self.text1.place(x=100, y=30)
+
+        self.bt1=Button(ventana, text="Listar", command=self.listar)
+        self.bt1.place(x=60, y=80)
+
+        """etiqueta1 = LabelFrame(ventana, text="Datos paciente: ", font=('Arial', 12))
+        etiqueta2 = LabelFrame(ventana, text="Lista de pacientes: ", font=('Arial', 12))
+        
+        etiqueta1.pack(fill="both", expand="yes", padx=20, pady=10)
+        etiqueta2.pack(fill="both", expand="yes", padx=20, pady=10)
+        
+        trv = ttk.Treeview(etiqueta2, columns=(1,2,3,4), show="headings", height="10")
+        trv.pack()
+
+        trv.heading(1, text="DNI")
+        trv.heading(2, text="Tiempo de espera")
+        trv.heading(3, text="Tiempo de espera maximo")
+        trv.heading(4, text="Enfermedad")
+
+        lbll = Label(etiqueta1, text="DNI:")
+        lbll.grid(column=0, row=0, padx= 5, pady=3)
+        ent1 = Entry(etiqueta1)
+        ent1.grid(column=1, row=0, padx=5, pady=3)
+        lbll = Label(etiqueta1, text="Tiempo de espera:")
+        lbll.grid(column=0, row=1, padx= 5, pady=3)
+        ent1 = Entry(etiqueta1)
+        ent1.grid(column=1, row=1, padx=5, pady=3)
+        lbll = Label(etiqueta1, text="Tiempo de espra maximo:")
+        lbll.grid(column=0, row=2, padx= 5, pady=3)
+        ent1 = Entry(etiqueta1)
+        ent1.grid(column=1, row=2, padx=5, pady=3)
+        lbll = Label(etiqueta1, text="Enfermedad:")
+        lbll.grid(column=0, row=3, padx= 5, pady=3)
+        ent1 = Entry(etiqueta1)
+        ent1.grid(column=1, row=3, padx=5, pady=3)
+
+        agregar_btn = Button(etiqueta1, text="Agregar")
+        agregar_btn.grid(column=0, row=4, padx=5, pady=3)"""
+
+        ventana.mainloop()
+
+    """def listar(self):
+        self.pacientesarchivo()
+        for paciente in self.listaarchivo:
+            print("el paciente ",paciente.dni," con enfermedad",paciente.enfermedad)
+            #convierto cada elemento en self.listaarchivo a cadena de texto usando list comprehension
+            lista_como_cadena = ", ".join(str(paciente) for paciente in self.listaarchivo)
+        messagebox.showinfo(message="Lista de pacientes: {}".format(lista_como_cadena), title="Lista")"""
+
+    def listar(self):
+        self.pacientesarchivo()
+        lista_como_cadena = ""  #inicializo la cadena vacía
+        for paciente in self.listaarchivo:
+            detalle_paciente = "el paciente {} con enfermedad {}".format(paciente.dni, paciente.enfermedad)
+            print(detalle_paciente)  #imprimo cada paciente en la consola
+            lista_como_cadena += detalle_paciente + "\n"  #agrego el detalle del paciente a la cadena con un salto de línea
+
+        messagebox.showinfo(message="Lista de pacientes:\n{}".format(lista_como_cadena), title="Lista")
+
     def pacientesarchivo(self):
         with open("src/Pacientes.csv",'r') as file:
-            reader=csv.DictReader(file) #crea un diccionario con el encabezado, es decir que permite recorrer cada lista y ser reconocida por su encabezado
+            reader = csv.DictReader(file) #crea un diccionario con el encabezado, es decir que permite recorrer cada lista y ser reconocida por su encabezado
             for row in reader: #almacenamos en cada variable el valor de cada columna
-                Dni= row['dni']
+                Dni = row['dni']
                 tiempoespe = int(row['tiempoespera'])
                 tiempomax = int(row['tiempoesperamax'])
                 enfermed = row ['enfermedad']
@@ -82,7 +152,7 @@ class Hospital:
 
     def print_file(self): 
         with open("src/Pacientes.csv") as file: 
-            writer=csv.writer(file) 
+            writer = csv.writer(file) 
             for row in writer: 
                 writer.writerow(row)
 
@@ -113,8 +183,8 @@ class Hospital:
     def agregarmedico(self, medico):
         self.listamedicos.append(medico)
 
-    def dearchivo_a_paciente(self,valor):# funcion que pasa de la lista archivos a la lista paciente, los pacientes.
-                                    #se realiza esto para simular que ingresan pacientes en el medio del programa
+    def dearchivo_a_paciente(self,valor):#funcion que pasa de la lista archivos a la lista paciente, los pacientes.
+                                         #se realiza esto para simular que ingresan pacientes en el medio del programa
         if valor == 0:
             h=0 
             while h < 8:
@@ -142,7 +212,7 @@ class Hospital:
     def listado(self):
             listapacientescopia = self.listapaciente.copy()
             for paciente in listapacientescopia:
-                if paciente.enfermedad in (Paciente.enfermedades.politraumatismo.value , Paciente.enfermedades.coma.value) :
+                if paciente.enfermedad in (Paciente.enfermedades.politraumatismo.value , Paciente.enfermedades.coma.value):
                     self.listarojo.append(paciente)
                     self.listapaciente.remove(paciente)
                 elif paciente.enfermedad in (Paciente.enfermedades.convulsion.value, Paciente.enfermedades.hemorragia_dig.value,Paciente.enfermedades.isquemia.value):
@@ -237,34 +307,16 @@ class Hospital:
                 elif int(len(self.listaazul)) != 0:
                     j.atender(self.listaazul[0])
                     self.listaazul.pop(0)
+
     def pacientefallecido(self):
         j=0
         if len(self.listapaciente)==0:
             return
         for paciente in self.listapaciente:
-            if paciente.tiempoespera == paciente.tiempoesperamax :
+            if paciente.tiempoespera == paciente.tiempoesperamax:
                 print("el paciente",paciente.dni," con enfermedad ",paciente.enfermedad,"a fallecido")
                 self.listapaciente.remove(paciente)
-               
-
-    """def interfaz(self):
-        paciente = self.ordenar() 
-        ventana = tk.Tk()
-        etiqueta = tk.Label(ventana, text="Paciente: " + paciente, bg="white", fg="black", font=("Arial", 12), width=20, height=2, anchor="center")
-        etiqueta.pack()
-        ventana.mainloop()
-
-        lista = merge_sort()
-        ventana1 = tk.Tk()
-        #creo un nuevo botón
-        etiqueta2 = tk.Button(ventana1, text="Lista de pacientes: " + lista, bg="white", fg="black", font=("Arial", 12), width=20, height=2, anchor="center")
-        etiqueta2.pack() 
-
-        ventana1.destroy()
-        #botón para cerrar la ventana
-        cerrar_boton = tk.Button(ventana1, text="Cerrar Ventana")
-        cerrar_boton.pack() 
-        ventana1.mainloop()"""
+        
 #fuera de la clase 
 def merge_sort(lista_pacientes):
     if int (len(lista_pacientes)) > 1:
