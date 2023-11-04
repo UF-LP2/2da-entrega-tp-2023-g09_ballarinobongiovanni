@@ -83,49 +83,7 @@ class Hospital:
         self.bt1=Button(ventana, text="Listar", command=self.listar)
         self.bt1.place(x=60, y=80)
 
-        """etiqueta1 = LabelFrame(ventana, text="Datos paciente: ", font=('Arial', 12))
-        etiqueta2 = LabelFrame(ventana, text="Lista de pacientes: ", font=('Arial', 12))
-        
-        etiqueta1.pack(fill="both", expand="yes", padx=20, pady=10)
-        etiqueta2.pack(fill="both", expand="yes", padx=20, pady=10)
-        
-        trv = ttk.Treeview(etiqueta2, columns=(1,2,3,4), show="headings", height="10")
-        trv.pack()
-
-        trv.heading(1, text="DNI")
-        trv.heading(2, text="Tiempo de espera")
-        trv.heading(3, text="Tiempo de espera maximo")
-        trv.heading(4, text="Enfermedad")
-
-        lbll = Label(etiqueta1, text="DNI:")
-        lbll.grid(column=0, row=0, padx= 5, pady=3)
-        ent1 = Entry(etiqueta1)
-        ent1.grid(column=1, row=0, padx=5, pady=3)
-        lbll = Label(etiqueta1, text="Tiempo de espera:")
-        lbll.grid(column=0, row=1, padx= 5, pady=3)
-        ent1 = Entry(etiqueta1)
-        ent1.grid(column=1, row=1, padx=5, pady=3)
-        lbll = Label(etiqueta1, text="Tiempo de espra maximo:")
-        lbll.grid(column=0, row=2, padx= 5, pady=3)
-        ent1 = Entry(etiqueta1)
-        ent1.grid(column=1, row=2, padx=5, pady=3)
-        lbll = Label(etiqueta1, text="Enfermedad:")
-        lbll.grid(column=0, row=3, padx= 5, pady=3)
-        ent1 = Entry(etiqueta1)
-        ent1.grid(column=1, row=3, padx=5, pady=3)
-
-        agregar_btn = Button(etiqueta1, text="Agregar")
-        agregar_btn.grid(column=0, row=4, padx=5, pady=3)"""
-
         ventana.mainloop()
-
-    """def listar(self):
-        self.pacientesarchivo()
-        for paciente in self.listaarchivo:
-            print("el paciente ",paciente.dni," con enfermedad",paciente.enfermedad)
-            #convierto cada elemento en self.listaarchivo a cadena de texto usando list comprehension
-            lista_como_cadena = ", ".join(str(paciente) for paciente in self.listaarchivo)
-        messagebox.showinfo(message="Lista de pacientes: {}".format(lista_como_cadena), title="Lista")"""
 
     def listar(self):
         self.pacientesarchivo()
