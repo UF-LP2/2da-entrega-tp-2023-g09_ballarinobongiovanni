@@ -83,7 +83,7 @@ class Hospital:
         self.bt1=Button(ventana, text="Listar", command=self.listar)
         self.bt1.place(x=60, y=80)
 
-        ventana.mainloop()
+        #ventana.mainloop()
 
     def listar(self):
         self.pacientesarchivo()

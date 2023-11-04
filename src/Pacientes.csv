@@ -6,13 +6,13 @@ dni,tiempoespera,tiempoesperamax,enfermedad
 567890123,0,10,Isquemia
 678901234,0,60,Cefalea brusca
 789012345,0,60,Paresia
-890123456,0,60,Hipertensión arterial
-345678912,0,60,Vértigo con afectación vegetativa
-456789123,0,60,Síncope
-567891234,0,60,Urgencias psiquiátricas
+890123456,0,60,Hipertension arterial
+345678912,0,60,Vertigo con afectacion vegetativa
+456789123,0,60,Sincope
+567891234,0,60,Urgencias psiquiatricas
 678912345,0,120,Otalgias
 789123456,0,120,Odontalgias
-891234567,0,120,Dolores inespecíficos leves
+891234567,0,120,Dolores inespecificos leves
 912345678,0,120,Traumatismos y esguinces
 543210987,0,240,No urgente 
 654321098,0,0,Politraumatismo grave
@@ -22,13 +22,13 @@ dni,tiempoespera,tiempoesperamax,enfermedad
 234567890,0,10,Isquemia
 345678901,0,60,Cefalea brusca
 456789012,0,60,Paresia
-567890123,0,60,Hipertensión arterial
-678901234,0,60,Vértigo con afectación vegetativa
-789012345,0,60,Síncope
-890123456,0,60,Urgencias psiquiátricas
+567890123,0,60,Hipertension arterial
+678901234,0,60,Vertigo con afectacion vegetativa
+789012345,0,60,Sincope
+890123456,0,60,Urgencias psiquiatricas
 345678912,0,120,Otalgias
 456789123,0,120,Odontalgias
-567891234,0,120,Dolores inespecíficos leves
+567891234,0,120,Dolores inespecificos leves
 678912345,0,120,Traumatismos y esguinces
 789123456,0,0,Politraumatismo grave
 891234567,0,0,Coma
@@ -37,8 +37,8 @@ dni,tiempoespera,tiempoesperamax,enfermedad
 654321098,0,10,Isquemia
 765432109,0,60,Cefalea brusca
 876543210,0,60,Paresia
-987654321,0,60,Hipertensión arterial
-234567890,0,60,Vértigo con afectación vegetativa
+987654321,0,60,Hipertension arterial
+234567890,0,60,Vertigo con afectacion vegetativa
 
 
 
