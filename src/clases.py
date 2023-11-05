@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import *
-from tkinter import messagebox
+
 
 from enum import Enum
 import csv
@@ -69,32 +69,20 @@ class Hospital:
         self.listaarchivo = []
         self.nombre = nombre
 
-        """ ventana = Tk()
-        ventana.geometry('400x400')
-        #ventana.config(bg='white')
-        ventana.title("Interfaz")
-
-        self.label1=Label(ventana, text="Listar:")
-        self.label1.place(x=40, y=30)
-
-        self.text1=Entry(ventana)
-        self.text1.place(x=100, y=30)
-
-        self.bt1=Button(ventana, text="Listar", command=self.listar)
-        self.bt1.place(x=60, y=80)
-
-        #ventana.mainloop()"""
 
     def listar(self):
         self.pacientesarchivo()
         lista_como_cadena = ""  #inicializo la cadena vacía
+        i=1
         for paciente in self.listaarchivo:
-            detalle_paciente = "el paciente {} con enfermedad {}".format(paciente.dni, paciente.enfermedad)
-            print(detalle_paciente)  #imprimo cada paciente en la consola
-            lista_como_cadena += detalle_paciente + "\n"  #agrego el detalle del paciente a la cadena con un salto de línea
 
-        messagebox.showinfo(message="Lista de pacientes:\n{}".format(lista_como_cadena), title="Lista")
-
+            detallepaciente = "{}.el paciente {} con enfermedad {}".format(i,paciente.dni, paciente.enfermedad)
+            lista_como_cadena += detallepaciente + "\n"  #agrego el detalle del paciente a la cadena con un salto de línea
+            i+=1
+        
+        lista_label = tk.Label(text="Lista de pacientes:\n{}".format(lista_como_cadena), font=("time new roman", 8),justify='left')
+        
+        lista_label.pack(fill=tk.BOTH, expand=True)
     def pacientesarchivo(self):
         with open("src/Pacientes.csv",'r') as file:
             reader = csv.DictReader(file) #crea un diccionario con el encabezado, es decir que permite recorrer cada lista y ser reconocida por su encabezado
