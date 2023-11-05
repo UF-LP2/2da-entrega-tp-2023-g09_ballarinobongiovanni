@@ -76,7 +76,7 @@ class Hospital:
         i=1
         for paciente in self.listaarchivo:
 
-            detallepaciente = "{}.el paciente {} con enfermedad {}".format(i,paciente.dni, paciente.enfermedad)
+            detallepaciente = "{}.El Paciente {} con enfermedad {}".format(i,paciente.dni, paciente.enfermedad)
             lista_como_cadena += detallepaciente + "\n"  #agrego el detalle del paciente a la cadena con un salto de línea
             i+=1
         
