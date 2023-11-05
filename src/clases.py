@@ -69,7 +69,7 @@ class Hospital:
         self.listaarchivo = []
         self.nombre = nombre
 
-        ventana = Tk()
+        """ ventana = Tk()
         ventana.geometry('400x400')
         #ventana.config(bg='white')
         ventana.title("Interfaz")
@@ -83,7 +83,7 @@ class Hospital:
         self.bt1=Button(ventana, text="Listar", command=self.listar)
         self.bt1.place(x=60, y=80)
 
-        #ventana.mainloop()
+        #ventana.mainloop()"""
 
     def listar(self):
         self.pacientesarchivo()
@@ -123,7 +123,7 @@ class Hospital:
 
     def aumentartiempodeespera(self): #aumenta el tiempo de espera de los pacientes
         for paciente in self.listapaciente:
-            paciente.set_tiempoespera(paciente.get_tiempoespera() + 3 ) #aumenta el tiempo
+            paciente.set_tiempoespera(paciente.get_tiempoespera() + 5 ) #aumenta el tiempo
 
     def medicoshorario(self, horaactual): #retorna una lista       
         for medico in self.listamedicos:
@@ -145,19 +145,19 @@ class Hospital:
                                          #se realiza esto para simular que ingresan pacientes en el medio del programa
         if valor == 0:
             h=0 
-            while h < 8:
+            while h < 6:
                 self.agregarpaciente(self.listaarchivo[0])
                 self.listaarchivo.pop(0)
                 h+=1
             return True
-        elif valor ==7 :
+        elif valor ==84 :
             h=0 
-            while h < 20:
+            while h < 22:
                 self.agregarpaciente(self.listaarchivo[0])
                 self.listaarchivo.pop(0)
                 h+=1
             return True
-        elif valor == 15:
+        elif valor == 180:
              h=0 
              while h < 12:
                 self.agregarpaciente(self.listaarchivo[0])

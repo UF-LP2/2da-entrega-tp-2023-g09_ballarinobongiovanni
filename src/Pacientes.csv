@@ -3,9 +3,9 @@ dni,tiempoespera,tiempoesperamax,enfermedad
 987654321,0,0,Coma
 234567890,0,10,Convulsiones
 345678901,0,10,Hemorragia digestiva
-567890123,0,10,Isquemia
 678901234,0,60,Cefalea brusca
 789012345,0,60,Paresia
+567890123,0,10,Isquemia
 890123456,0,60,Hipertension arterial
 345678912,0,60,Vertigo con afectacion vegetativa
 456789123,0,60,Sincope
