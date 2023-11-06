@@ -260,6 +260,8 @@ class Hospital:
         for paciente in self.listapaciente:
             if paciente.tiempoespera == paciente.tiempoesperamax:
                 print("el paciente",paciente.dni," con enfermedad ",paciente.enfermedad,"a fallecido")
+                fallecido_label=tk.Label(text="El Paciente{} con enfermedad {} a fallecido".format(paciente.dni, paciente.enfermedad),font=("Arial",8),fg="red",justify='left' )
+                fallecido_label.pack(fill=tk.BOTH, expand=True)
                 self.listapaciente.remove(paciente)
         
 #fuera de la clase 
@@ -290,4 +292,3 @@ def merge_sort(lista_pacientes):
             k += 1
     return lista_pacientes
 
-  
