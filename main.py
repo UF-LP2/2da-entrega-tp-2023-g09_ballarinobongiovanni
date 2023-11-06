@@ -1,7 +1,9 @@
 from src.clases import Paciente
 from src.clases import Medico
 from src.clases import Hospital
-import interfaz
+from src.clases import Enfermero
+
+
 
 def main() -> None:
   hospital = Hospital("Hospital") #tengo que pasarle info
@@ -19,6 +21,7 @@ def main() -> None:
   medico_diez = Medico(dni=45678913, horarioinicio=192, horariofin=276, presentismo=True)#tarde noche
   medico_once = Medico(dni=12345681, horarioinicio=192, horariofin=276, presentismo=True)
   medico_doce = Medico(dni=98765435, horarioinicio=276, horariofin=288, presentismo=True)
+  enfermero = Enfermero(dni=4566778)
   hospital.agregarmedico(medico_uno)
   hospital.agregarmedico(medico_dos)
   hospital.agregarmedico(medico_tres)
@@ -36,15 +39,15 @@ def main() -> None:
   for i in range (288): #cada iteracion son 5 min hora real
     listar = hospital.dearchivo_a_paciente(i)
     if listar == True:
-      hospital.listado() #tendriamos que ver si los listamos dentro del for
+      enfermero.listado(hospital.listapaciente,hospital)
+      #hospital.listado() #tendriamos que ver si los listamos dentro del for
       hospital.ordenar() #ordena con mergesort
 
     hospital.medicoshorario(i) #crea una lista de los medicos habilitados para ese horario
-    hospital.dyc() #funcion dividir y conquistar
-    hospital.finalizaciondehorario(i) #desocupa los medicos
+    hospital.dyc(i) #funcion dividir y conquistar
+    hospital.finalizaciondehorario() #desocupa los medicos
     hospital.aumentartiempodeespera()
     hospital.pacientefallecido()
-    interfaz.simulacion()
 
   for j in hospital.listapaciente: #para comprobar si hubo alguno sin atender
     print(j)

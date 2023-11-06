@@ -1,6 +1,7 @@
 from src.clases import Paciente
 from src.clases import Medico
 from src.clases import Hospital
+from src.clases import Enfermero
 
 """def lista_de_medicos():
     hp = Hospital("hospital")
@@ -62,7 +63,7 @@ def test_dyc():
     hp.medicoshorario(9)
     hp.listado()
     hp.ordenar()
-    hp.dyc()
+    hp.dyc(7)
 
     assert(hp.listapaciente[0].dni) == (p1.dni)
 
@@ -72,12 +73,13 @@ def test_listado():
     p2 = Paciente(dni=4567895, tiempoespera=116, tiempoesperamax=120, enfermedad="Otalgias")
     p3 = Paciente(dni=4567867, tiempoespera=239, tiempoesperamax=240676767, enfermedad="no urgencia")
     p4 = Paciente(dni=123456789,tiempoespera=0, tiempoesperamax=0,enfermedad="Politraumatismo grave")
+    enfermero = Enfermero(dni=4566778)
     hp.agregarpaciente(p2)
     hp.agregarpaciente(p1)
     hp.agregarpaciente(p3)
     hp.agregarpaciente(p4)
-
-    hp.listado()
+    enfermero.listado(hp.listapaciente,hp)
+    #hp.listado()
 
     assert(hp.listarojo[0].dni) == (p4.dni)
     assert(hp.listaazul[0].tiempoesperamax) == 240
@@ -122,7 +124,7 @@ def test_greedy():
 
     hp.medicoshorario(9)
     hp.listado()
-    hp.greedy()
+    hp.greedy(9)
 
     assert int(len(hp.listanaranja)) == 1
     assert int(len(hp.listarojo)) == 0
