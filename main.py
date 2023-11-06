@@ -1,9 +1,10 @@
 from src.clases import Paciente
 from src.clases import Medico
 from src.clases import Hospital
+import interfaz
 
 def main() -> None:
-  hospital = Hospital("hospital") #tengo que pasarle info
+  hospital = Hospital("Hospital") #tengo que pasarle info
   """La cantidad de enfermeros dedicados varía. Uno cubre el turno nocturno (23 a 6), dos cubren
   la mañana (6 a 10), cinco la hora pico (10 a 16) y tres el resto del horario (16 a 23). """
   medico_uno = Medico(dni=45678910, horarioinicio=0, horariofin=72, presentismo=True)
@@ -30,7 +31,7 @@ def main() -> None:
   hospital.agregarmedico(medico_diez)
   hospital.agregarmedico(medico_once)
   hospital.agregarmedico(medico_doce)
-  
+
   hospital.pacientesarchivo()
   for i in range (288): #cada iteracion son 5 min hora real
     listar = hospital.dearchivo_a_paciente(i)
@@ -41,13 +42,13 @@ def main() -> None:
     hospital.medicoshorario(i) #crea una lista de los medicos habilitados para ese horario
     hospital.dyc() #funcion dividir y conquistar
     hospital.finalizaciondehorario(i) #desocupa los medicos
-    #hospital.interfaz()
     hospital.aumentartiempodeespera()
     hospital.pacientefallecido()
+    interfaz.simulacion()
 
   for j in hospital.listapaciente: #para comprobar si hubo alguno sin atender
     print(j)
-  print ("termino el programa")
+  print ("Termino el programa")
 
 
 if __name__ == "__main__":

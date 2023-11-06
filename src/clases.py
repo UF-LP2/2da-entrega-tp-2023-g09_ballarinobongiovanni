@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import *
-
+import random
 
 from enum import Enum
 import csv
@@ -33,10 +33,10 @@ class Paciente:
     def set_tiempoesperamaximo(self, tiempoesperamaximo):
         self.tiempoesperamax = tiempoesperamaximo
 
-    def __lt__(self,other): #sobrecarga del < , retorna true o false
+    def __lt__(self, other): #sobrecarga del < , retorna true o false
          return (self.tiempoesperamax - self.tiempoespera ) < (other.tiempoesperamax - other.tiempoespera)
 
-    def set_tiempoespera(self,tiempoespera):
+    def set_tiempoespera(self, tiempoespera):
         self.tiempoespera = tiempoespera
 
     def get_tiempoespera(self):
@@ -52,7 +52,7 @@ class Medico:
     def atender(self, valor):
         self.presentismo = valor
 
-    def set_presentismo(self,valor):
+    def set_presentismo(self, valor):
         self.presentismo = valor
 
 class Hospital:
@@ -68,20 +68,19 @@ class Hospital:
         self.listaarchivo = []
         self.nombre = nombre
 
-
     def listar(self):
         self.pacientesarchivo()
-        lista_como_cadena = ""  #inicializo la cadena vacía
+        lista_como_cadena = "" #inicializo la cadena vacía
         i=1
         for paciente in self.listaarchivo:
-
-            detallepaciente = "{}.El Paciente {} con enfermedad {}".format(i,paciente.dni, paciente.enfermedad)
+            detallepaciente = "{}.El Paciente con dni {} y con enfermedad {}".format(i, paciente.dni, paciente.enfermedad)
             lista_como_cadena += detallepaciente + "\n"  #agrego el detalle del paciente a la cadena con un salto de línea
             i+=1
         
-        lista_label = tk.Label(text="Lista de pacientes:\n{}".format(lista_como_cadena), font=("time new roman", 8),justify='left')
+        lista_label = tk.Label(text="Lista de pacientes:\n{}".format(lista_como_cadena), font=("time new roman", 8), justify='left')
         
         lista_label.pack(fill=tk.BOTH, expand=True)
+
     def pacientesarchivo(self):
         with open("src/Pacientes.csv",'r') as file:
             reader = csv.DictReader(file) #crea un diccionario con el encabezado, es decir que permite recorrer cada lista y ser reconocida por su encabezado
@@ -94,6 +93,8 @@ class Hospital:
                 pac = Paciente(Dni, tiempoespe, tiempomax, enfermed)
                 self.listaarchivo.append(pac)
                 #self.print_file() esto seria solo si queres agregar un paciente nuevo
+
+        random.shuffle(self.listaarchivo)
 
     def print_file(self): 
         with open("src/Pacientes.csv") as file: 
@@ -128,8 +129,8 @@ class Hospital:
     def agregarmedico(self, medico):
         self.listamedicos.append(medico)
 
-    def dearchivo_a_paciente(self,valor):#funcion que pasa de la lista archivos a la lista paciente, los pacientes.
-                                         #se realiza esto para simular que ingresan pacientes en el medio del programa
+    def dearchivo_a_paciente(self,valor): #funcion que pasa de la lista archivos a la lista paciente, los pacientes.
+                                          #se realiza esto para simular que ingresan pacientes en el medio del programa
         if valor == 0:
             h=0 
             while h < 6:
@@ -157,19 +158,18 @@ class Hospital:
     def listado(self):
             listapacientescopia = self.listapaciente.copy()
             for paciente in listapacientescopia:
-                if paciente.enfermedad in (Paciente.enfermedades.politraumatismo.value , Paciente.enfermedades.coma.value):
+                if paciente.enfermedad in (Paciente.enfermedades.politraumatismo.value, Paciente.enfermedades.coma.value):
                     self.listarojo.append(paciente)
                     self.listapaciente.remove(paciente)
-                elif paciente.enfermedad in (Paciente.enfermedades.convulsion.value, Paciente.enfermedades.hemorragia_dig.value,Paciente.enfermedades.isquemia.value):
+                elif paciente.enfermedad in (Paciente.enfermedades.convulsion.value, Paciente.enfermedades.hemorragia_dig.value, Paciente.enfermedades.isquemia.value):
                     self.listanaranja.append(paciente)
-                    paciente.set_tiempoesperamaximo(10)
-                    
+                    paciente.set_tiempoesperamaximo(10)                    
                 elif paciente.enfermedad in (Paciente.enfermedades.cefalea.value, Paciente.enfermedades.paresia.value,
-                                             Paciente.enfermedades.hipertension.value,Paciente.enfermedades.vertigo.value,Paciente.enfermedades.sincope.value, Paciente.enfermedades.urgencia_psi.value):
+                                             Paciente.enfermedades.hipertension.value, Paciente.enfermedades.vertigo.value, Paciente.enfermedades.sincope.value, Paciente.enfermedades.urgencia_psi.value):
                     self.listaamarillo.append(paciente)
                     paciente.set_tiempoesperamaximo(60)
                 elif paciente.enfermedad in (Paciente.enfermedades.otalgias.value, Paciente.enfermedades.odontalgia.value,
-                                             Paciente.enfermedades.dolor_leve.value, Paciente.enfermedades.traumatismos.value,Paciente.enfermedades.esguinces.value):
+                                             Paciente.enfermedades.dolor_leve.value, Paciente.enfermedades.traumatismos.value, Paciente.enfermedades.esguinces.value):
                     self.listaverde.append(paciente)
                     paciente.set_tiempoesperamaximo(120)
                 else:
@@ -225,8 +225,7 @@ class Hospital:
                      
                 elif self.listapaciente:               
                     j.atender(False)
-                    self.listapaciente.pop(0)
-               
+                    self.listapaciente.pop(0)         
 
     def greedy(self): #recibe la hora del for 
         j = 0
@@ -259,8 +258,8 @@ class Hospital:
             return
         for paciente in self.listapaciente:
             if paciente.tiempoespera == paciente.tiempoesperamax:
-                print("el paciente",paciente.dni," con enfermedad ",paciente.enfermedad,"a fallecido")
-                fallecido_label=tk.Label(text="El Paciente{} con enfermedad {} a fallecido".format(paciente.dni, paciente.enfermedad),font=("Arial",8),fg="red",justify='left' )
+                print("El paciente",paciente.dni," con enfermedad ",paciente.enfermedad,"ha fallecido")
+                fallecido_label=tk.Label(text="El Paciente con dni {} y con enfermedad {} ha fallecido".format(paciente.dni, paciente.enfermedad),font=("Arial",8),fg="red",justify='left' )
                 fallecido_label.pack(fill=tk.BOTH, expand=True)
                 self.listapaciente.remove(paciente)
         
