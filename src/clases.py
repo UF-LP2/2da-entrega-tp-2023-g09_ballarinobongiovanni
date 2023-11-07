@@ -54,7 +54,7 @@ class Medico:
         self.presentismo = valor
         tiempo=int(i) * 5
         medico_label=tk.Label(text="El Medico con dni {} , atendio al Paciente  {} con {} en el minuto {} del dia  ".format(self.dni, paciente.dni, paciente.enfermedad,tiempo),font=("Arial",8),justify='left',wraplength=600)
-        medico_label.pack(fill=tk.BOTH, expand=True)
+        medico_label.pack(fill=tk.BOTH, expand=False)
         """
         texto="El Medico con dni {} , atendio al Paciente  {} con {} en el minuto {} del dia  ".format(self.dni, paciente.dni, paciente.enfermedad,tiempo)
         listalibro = listalibro + texto + "\n"
@@ -294,7 +294,7 @@ class Hospital:
             if paciente.tiempoespera == paciente.tiempoesperamax:
                 print("El paciente",paciente.dni," con enfermedad ",paciente.enfermedad,"ha fallecido")
                 fallecido_label=tk.Label(text="El Paciente con dni {} y con enfermedad {} ha fallecido".format(paciente.dni, paciente.enfermedad),font=("Arial",8),fg="red",justify='left',wraplength=600)
-                fallecido_label.pack(fill=tk.BOTH, expand=True)
+                fallecido_label.pack(fill=tk.BOTH, expand=False)
                 self.listapaciente.remove(paciente)
         
 ###################################################### fuera de la clase ########################################################################### 

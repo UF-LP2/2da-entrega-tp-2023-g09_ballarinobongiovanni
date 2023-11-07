@@ -45,7 +45,7 @@ def simulacion():
 
     hospital.medicoshorario(i) #crea una lista de los medicos habilitados para ese horario
     hospital.dyc(i) #funcion dividir y conquistar
-    hospital.finalizaciondehorario(i) #desocupa los medicos
+    hospital.finalizaciondehorario() #desocupa los medicos
     hospital.aumentartiempodeespera()
     hospital.pacientefallecido()
 
