@@ -44,10 +44,10 @@ def main() -> None:
       hospital.ordenar() #ordena con mergesort
 
     hospital.medicoshorario(i) #crea una lista de los medicos habilitados para ese horario
-    hospital.dyc(i) #funcion dividir y conquistar
+    hospital.dyc(i,2) #funcion dividir y conquistar
     hospital.finalizaciondehorario() #desocupa los medicos
     hospital.aumentartiempodeespera()
-    hospital.pacientefallecido()
+    hospital.pacientefallecido(2)
 
   for j in hospital.listapaciente: #para comprobar si hubo alguno sin atender
     print(j)

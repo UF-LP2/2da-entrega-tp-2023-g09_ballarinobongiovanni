@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import *
 import random
-from tkinter import scrolledtext
+
 
 from enum import Enum
 import csv
@@ -50,17 +50,12 @@ class Medico:
         self.horariofin = horariofin
         self.presentismo = presentismo #si esta habilitado para atender o esta ocupado
 
-    def atender(self, valor, i, paciente):
+    def atender(self, valor, i, paciente,text_widget):
         self.presentismo = valor
         tiempo=int(i) * 5
-        medico_label=tk.Label(text="El Medico con dni {} , atendio al Paciente  {} con {} en el minuto {} del dia  ".format(self.dni, paciente.dni, paciente.enfermedad,tiempo),font=("Arial",8),justify='left',wraplength=600)
-        medico_label.pack(fill=tk.BOTH, expand=False)
-        """
-        texto="El Medico con dni {} , atendio al Paciente  {} con {} en el minuto {} del dia  ".format(self.dni, paciente.dni, paciente.enfermedad,tiempo)
-        listalibro = listalibro + texto + "\n"
-        scroll_text = scrolledtext.ScrolledText( wrap=tk.WORD)
-        scroll_text.insert(tk.END,texto)
-        scroll_text.pack()"""
+        if text_widget != 2:
+            text_widget.insert(tk.END, "El Medico con dni {} , atendió al Paciente  {} con {} en el minuto {} del día\n".format(self.dni, paciente.dni, paciente.enfermedad, tiempo))
+       
 
     def set_presentismo(self, valor):
         self.presentismo = valor
@@ -102,18 +97,7 @@ class Hospital:
         self.listaarchivo = []
         self.nombre = nombre
 
-    def listar(self):
-        self.pacientesarchivo()
-        lista_como_cadena = "" #inicializo la cadena vacía
-        i=1
-        for paciente in self.listaarchivo:
-            detallepaciente = "{}.El Paciente con dni {} y con enfermedad {}".format(i, paciente.dni, paciente.enfermedad)
-            lista_como_cadena += detallepaciente + "\n"  #agrego el detalle del paciente a la cadena con un salto de línea
-            i+=1
-        
-        lista_label = tk.Label(text="Lista de pacientes:\n{}".format(lista_como_cadena), font=("time new roman", 8), justify='left')
-        
-        lista_label.pack(fill=tk.BOTH, expand=True)
+    
 
     def pacientesarchivo(self):
         with open("src/Pacientes.csv",'r') as file:
@@ -245,56 +229,56 @@ class Hospital:
             
         return self.listapaciente[0]"""
        
-    def dyc(self,i): #recibe la lista completa sin los rojos, y llama el ordenar
+    def dyc(self,i,simulacionventana): #recibe la lista completa sin los rojos, y llama el ordenar
         j = 0      #si ponemos los pacientes en hp. listapaciente, hay que sacar la variable
        
         for j in self.listamedicoshab:
             if j.presentismo != False:
                 if int( len(self.listarojo)) != 0:
-                    j.atender(False,i,self.listarojo[0])
+                    j.atender(False,i,self.listarojo[0],simulacionventana)
                     if int(len(self.listarojo)) == 1:
                         self.listarojo.clear()
                     else:
                         self.listarojo.pop(0)
                      
                 elif self.listapaciente:               
-                    j.atender(False,i,self.listapaciente[0])
+                    j.atender(False,i,self.listapaciente[0],simulacionventana)
                     self.listapaciente.pop(0)         
 
-    def greedy(self,i): #recibe la hora del for 
+    def greedy(self,i,simulacionventana): #recibe la hora del for 
         j = 0
 
         for j in self.listamedicoshab:
             if j.presentismo != False:
                 if int(len(self.listarojo)) != 0:
-                    j.atender(False,i,self.listarojo[0])
+                    j.atender(False,i,self.listarojo[0],simulacionventana)
                     self.listarojo.pop(0) 
 
                 elif int(len(self.listanaranja)) != 0:
-                    j.atender(False,i,self.listanaranja[0])
+                    j.atender(False,i,self.listanaranja[0],simulacionventana)
                     self.listanaranja.pop(0) 
 
                 elif int(len(self.listaamarillo)) != 0:
-                    j.atender(False,i,self.listaamarillo[0])
+                    j.atender(False,i,self.listaamarillo[0],simulacionventana)
                     self.listaamarillo.pop(0) 
                 
                 elif int(len(self.listaverde)) != 0:
-                    j.atender(False,i,self.listaverde[0])
+                    j.atender(False,i,self.listaverde[0],simulacionventana)
                     self.listaverde.pop(0) 
 
                 elif int(len(self.listaazul)) != 0:
-                    j.atender(False,i,self.listaazul[0])
+                    j.atender(False,i,self.listaazul[0],simulacionventana)
                     self.listaazul.pop(0)
 
-    def pacientefallecido(self):
+    def pacientefallecido(self,text_widget):
         j=0
         if len(self.listapaciente)==0:
             return
         for paciente in self.listapaciente:
             if paciente.tiempoespera == paciente.tiempoesperamax:
                 print("El paciente",paciente.dni," con enfermedad ",paciente.enfermedad,"ha fallecido")
-                fallecido_label=tk.Label(text="El Paciente con dni {} y con enfermedad {} ha fallecido".format(paciente.dni, paciente.enfermedad),font=("Arial",8),fg="red",justify='left',wraplength=600)
-                fallecido_label.pack(fill=tk.BOTH, expand=False)
+                if text_widget != 2:
+                    text_widget.insert(tk.END, "El Paciente con dni {} y con enfermedad {} ha fallecido\n".format(paciente.dni, paciente.enfermedad),"rojo")
                 self.listapaciente.remove(paciente)
         
 ###################################################### fuera de la clase ########################################################################### 

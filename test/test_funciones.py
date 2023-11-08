@@ -50,7 +50,7 @@ def test_dyc():
     medico_uno = Medico(dni= 45678910,horarioinicio=1,horariofin=10,presentismo=True)
     medico_dos = Medico(dni=12345678, horarioinicio=9, horariofin=14, presentismo=True)
     medico_tres = Medico(dni=98765432, horarioinicio=8, horariofin=12, presentismo=True)
-   
+    aba=2
     hp.agregarmedico(medico_uno )
     hp.agregarmedico(medico_dos )
     hp.agregarmedico(medico_tres)
@@ -63,7 +63,7 @@ def test_dyc():
     hp.medicoshorario(9)
     hp.listado()
     hp.ordenar()
-    hp.dyc(7)
+    hp.dyc(7,aba)
 
     assert(hp.listapaciente[0].dni) == (p1.dni)
 
@@ -110,7 +110,7 @@ def test_greedy():
     medico_uno = Medico(dni= 45678910,horarioinicio=1,horariofin=10,presentismo=True)
     medico_dos = Medico(dni=12345678, horarioinicio=9, horariofin=14, presentismo=True)
     medico_tres = Medico(dni=98765432, horarioinicio=8, horariofin=12, presentismo=True)
-   
+    aba=2
     hp.agregarmedico(medico_uno)
     hp.agregarmedico(medico_dos)
     hp.agregarmedico(medico_tres)
@@ -124,7 +124,7 @@ def test_greedy():
 
     hp.medicoshorario(9)
     hp.listado()
-    hp.greedy(9)
+    hp.greedy(9,aba)
 
     assert int(len(hp.listanaranja)) == 1
     assert int(len(hp.listarojo)) == 0
