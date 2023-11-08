@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import *
 import random
 
-#lj
+#ljkdeopkdsoko
 from enum import Enum
 import csv
 class Paciente:
