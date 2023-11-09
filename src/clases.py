@@ -2,7 +2,8 @@ import tkinter as tk
 from tkinter import *
 import random
 
-#ljkdeopkdsokohdhdshsdhhgkhghfutfuff
+
+
 from enum import Enum
 import csv
 class Paciente:
@@ -49,13 +50,14 @@ class Medico:
         self.horarioinicio = horarioinicio
         self.horariofin = horariofin
         self.presentismo = presentismo #si esta habilitado para atender o esta ocupado
-
+        self.pacientes_atendidos = 0 
     def atender(self, valor, i, paciente,text_widget):
+        
         self.presentismo = valor
         tiempo=int(i) * 5
         if text_widget != 2:
             text_widget.insert(tk.END, "El Medico con dni {} , atendió al Paciente  {} con {} en el minuto {} del día\n".format(self.dni, paciente.dni, paciente.enfermedad, tiempo))
-       
+        self.pacientes_atendidos += 1
 
     def set_presentismo(self, valor):
         self.presentismo = valor
