@@ -2,8 +2,6 @@ import tkinter as tk
 from tkinter import *
 import random
 
-
-
 from enum import Enum
 import csv
 class Paciente:
@@ -43,6 +41,7 @@ class Paciente:
 
     def get_tiempoespera(self):
         return self.tiempoespera
+    
 ############################################## Clase Medico ######################################################################################################        
 class Medico:
     def __init__(self, dni, horarioinicio, horariofin, presentismo):
@@ -51,8 +50,8 @@ class Medico:
         self.horariofin = horariofin
         self.presentismo = presentismo #si esta habilitado para atender o esta ocupado
         self.pacientes_atendidos = 0 
-    def atender(self, valor, i, paciente,text_widget):
-        
+
+    def atender(self, valor, i, paciente,text_widget):       
         self.presentismo = valor
         tiempo=int(i) * 5
         if text_widget != 2:
@@ -61,11 +60,13 @@ class Medico:
 
     def set_presentismo(self, valor):
         self.presentismo = valor
+
 ####################################################Clase Enfermero#############################################################################################
 class Enfermero:
     def __init__(self,dni):
         self.dni= dni
-    def listado(self,listapaciente, hospital):
+
+    def listado(self,listapaciente, hospital): 
          for paciente in listapaciente:
                 if paciente.enfermedad in (Paciente.enfermedades.politraumatismo.value, Paciente.enfermedades.coma.value):
                     hospital.listarojo.append(paciente)
@@ -98,8 +99,6 @@ class Hospital:
         self.listamedicoshab = []
         self.listaarchivo = []
         self.nombre = nombre
-
-    
 
     def pacientesarchivo(self):
         with open("src/Pacientes.csv",'r') as file:
@@ -175,64 +174,15 @@ class Hospital:
         else:
             return False
 
-    def listado(self):
-            listapacientescopia = self.listapaciente.copy()
-            for paciente in listapacientescopia:
-                if paciente.enfermedad in (Paciente.enfermedades.politraumatismo.value, Paciente.enfermedades.coma.value):
-                    self.listarojo.append(paciente)
-                    self.listapaciente.remove(paciente)
-                elif paciente.enfermedad in (Paciente.enfermedades.convulsion.value, Paciente.enfermedades.hemorragia_dig.value, Paciente.enfermedades.isquemia.value):
-                    self.listanaranja.append(paciente)
-                    paciente.set_tiempoesperamaximo(10)                    
-                elif paciente.enfermedad in (Paciente.enfermedades.cefalea.value, Paciente.enfermedades.paresia.value,
-                                             Paciente.enfermedades.hipertension.value, Paciente.enfermedades.vertigo.value, Paciente.enfermedades.sincope.value, Paciente.enfermedades.urgencia_psi.value):
-                    self.listaamarillo.append(paciente)
-                    paciente.set_tiempoesperamaximo(60)
-                elif paciente.enfermedad in (Paciente.enfermedades.otalgias.value, Paciente.enfermedades.odontalgia.value,
-                                             Paciente.enfermedades.dolor_leve.value, Paciente.enfermedades.traumatismos.value, Paciente.enfermedades.esguinces.value):
-                    self.listaverde.append(paciente)
-                    paciente.set_tiempoesperamaximo(120)
-                else:
-                    self.listaazul.append(paciente)
-                    paciente.set_tiempoesperamaximo(240)
-
     def ordenar(self): #en esta función se está ordenando la cola de pacientes en función de la diferencia entre el tiempo de espera y el tiempo máximo de espera, según el método de mergesort
      
        self.listapaciente = merge_sort(self.listapaciente) #ordena la lista
     
        elprimero = self.listapaciente[0] #accede al primer elemento
        return elprimero
-    
-       """ if len(self.listapaciente) > 1:
-            medio = int(len(self.listapaciente) / 2)
-            izq = self.listapaciente[:medio]
-            der = self.listapaciente[medio:]
-            self.ordenar(izq)
-            self.ordenar(der)
-
-            i = j = k = 0
-            while i < len(izq) and j < len(der):
-                if (izq[i].tiempoespera - izq[i].tiempoesperamax) < (der[j].tiempoespera - der[j].tiempomaxespera):
-                    self.listapaciente[k] = izq[i]
-                    i += 1
-                else:
-                    self.listapaciente[k] = der[j]
-                    j += 1
-            k += 1
-            while i < len(izq):
-                self.listapaciente[k] = izq[i]
-                i += 1
-                k += 1
-
-            while j < len(der):
-                self.listapaciente[k] = der[j]
-                j += 1
-                k += 1
-            
-        return self.listapaciente[0]"""
        
     def dyc(self,i,simulacionventana): #recibe la lista completa sin los rojos, y llama el ordenar
-        j = 0      #si ponemos los pacientes en hp. listapaciente, hay que sacar la variable
+        j = 0  #si ponemos los pacientes en hp. listapaciente, hay que sacar la variable
        
         for j in self.listamedicoshab:
             if j.presentismo != False:
@@ -272,7 +222,7 @@ class Hospital:
                     j.atender(False,i,self.listaazul[0],simulacionventana)
                     self.listaazul.pop(0)
 
-    def pacientefallecido(self,text_widget):
+    def pacientefallecido(self,text_widget): #avisa si fallece el paciente, segun el tiempo 
         j=0
         if len(self.listapaciente)==0:
             return

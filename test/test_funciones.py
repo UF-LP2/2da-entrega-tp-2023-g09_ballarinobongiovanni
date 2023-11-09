@@ -3,8 +3,6 @@ from src.clases import Medico
 from src.clases import Hospital
 from src.clases import Enfermero
 
-
-
 def test_ordenar():
     hp = Hospital("hospital")
     p1 = Paciente(dni=4567839, tiempoespera=5, tiempoesperamax=10, enfermedad="Isquemia")
@@ -24,13 +22,13 @@ def test_dyc():
     p1 = Paciente(dni=4567839, tiempoespera=5, tiempoesperamax=10, enfermedad="Isquemia")
     p2 = Paciente(dni=4567895, tiempoespera=116, tiempoesperamax=120, enfermedad="Otalgias")
     p3 = Paciente(dni=4567867, tiempoespera=239, tiempoesperamax=240, enfermedad="no urgencia")
-    p4 = Paciente(dni = 123456789,tiempoespera= 0, tiempoesperamax=0,enfermedad= "Politraumatismo grave")
-    medico_uno = Medico(dni= 45678910,horarioinicio=1,horariofin=10,presentismo=True)
+    p4 = Paciente(dni=123456789, tiempoespera= 0, tiempoesperamax=0, enfermedad="Politraumatismo grave")
+    medico_uno = Medico(dni=45678910, horarioinicio=1, horariofin=10, presentismo=True)
     medico_dos = Medico(dni=12345678, horarioinicio=9, horariofin=14, presentismo=True)
     medico_tres = Medico(dni=98765432, horarioinicio=8, horariofin=12, presentismo=True)
     aba=2
-    hp.agregarmedico(medico_uno )
-    hp.agregarmedico(medico_dos )
+    hp.agregarmedico(medico_uno)
+    hp.agregarmedico(medico_dos)
     hp.agregarmedico(medico_tres)
    
     hp.agregarpaciente(p2)
@@ -50,14 +48,13 @@ def test_listado():
     p1 = Paciente(dni=4567839, tiempoespera=5, tiempoesperamax=10, enfermedad="Isquemia")
     p2 = Paciente(dni=4567895, tiempoespera=116, tiempoesperamax=120, enfermedad="Otalgias")
     p3 = Paciente(dni=4567867, tiempoespera=239, tiempoesperamax=240676767, enfermedad="no urgencia")
-    p4 = Paciente(dni=123456789,tiempoespera=0, tiempoesperamax=0,enfermedad="Politraumatismo grave")
+    p4 = Paciente(dni=123456789, tiempoespera=0, tiempoesperamax=0, enfermedad="Politraumatismo grave")
     enfermero = Enfermero(dni=4566778)
     hp.agregarpaciente(p2)
     hp.agregarpaciente(p1)
     hp.agregarpaciente(p3)
     hp.agregarpaciente(p4)
     enfermero.listado(hp.listapaciente,hp)
-    #hp.listado()
 
     assert(hp.listarojo[0].dni) == (p4.dni)
     assert(hp.listaazul[0].tiempoesperamax) == 240
@@ -81,11 +78,11 @@ def test_greedy():
     p1 = Paciente(dni=4567839, tiempoespera=5, tiempoesperamax=10, enfermedad="Isquemia")
     p2 = Paciente(dni=4567895, tiempoespera=116, tiempoesperamax=120, enfermedad="Otalgias")
     p3 = Paciente(dni=4567867, tiempoespera=239, tiempoesperamax=240, enfermedad="no urgencia")
-    p4 = Paciente(dni = 123456789,tiempoespera= 0, tiempoesperamax=0,enfermedad= "Politraumatismo grave")
-    p5= Paciente(dni = 891234567,tiempoespera=0, tiempoesperamax=12232323,enfermedad="Coma")
+    p4 = Paciente(dni=123456789, tiempoespera=0, tiempoesperamax=0, enfermedad="Politraumatismo grave")
+    p5 = Paciente(dni=891234567, tiempoespera=0, tiempoesperamax=12232323, enfermedad="Coma")
     p6 = Paciente(dni=912345678, tiempoespera=0, tiempoesperamax=10, enfermedad="Convulsiones")
 
-    medico_uno = Medico(dni= 45678910,horarioinicio=1,horariofin=10,presentismo=True)
+    medico_uno = Medico(dni=45678910, horarioinicio=1, horariofin=10, presentismo=True)
     medico_dos = Medico(dni=12345678, horarioinicio=9, horariofin=14, presentismo=True)
     medico_tres = Medico(dni=98765432, horarioinicio=8, horariofin=12, presentismo=True)
     aba=2
@@ -108,7 +105,7 @@ def test_greedy():
     assert int(len(hp.listarojo)) == 0
     
 def test_aumentotiempo():
-    hp = Hospital("hospital")
+    hp = Hospital("Hospital")
     p1 = Paciente(dni=4567839, tiempoespera=3, tiempoesperamax=10, enfermedad="Isquemia")
     p2 = Paciente(dni=4567895, tiempoespera=112, tiempoesperamax=120, enfermedad="Otalgias")
     p3 = Paciente(dni=4567867, tiempoespera=235, tiempoesperamax=240, enfermedad="no urgencia")

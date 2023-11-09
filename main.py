@@ -3,12 +3,10 @@ from src.clases import Medico
 from src.clases import Hospital
 from src.clases import Enfermero
 
-
-
 def main() -> None:
-  hospital = Hospital("Hospital") #tengo que pasarle info
+  hospital = Hospital("Hospital") 
   """La cantidad de enfermeros dedicados varía. Uno cubre el turno nocturno (23 a 6), dos cubren
-  la mañana (6 a 10), cinco la hora pico (10 a 16) y tres el resto del horario (16 a 23). """
+  la mañana (6 a 10), cinco la hora pico (10 a 16) y tres el resto del horario (16 a 23)."""
   medico_uno = Medico(dni=45678910, horarioinicio=0, horariofin=72, presentismo=True)
   medico_dos = Medico(dni=12345678, horarioinicio=72, horariofin=120, presentismo=True)#mañana
   medico_tres = Medico(dni=98765432, horarioinicio=72, horariofin=120, presentismo=True)
@@ -40,14 +38,13 @@ def main() -> None:
     listar = hospital.dearchivo_a_paciente(i)
     if listar == True:
       enfermero.listado(hospital.listapaciente,hospital)
-      #hospital.listado() #tendriamos que ver si los listamos dentro del for
       hospital.ordenar() #ordena con mergesort
 
     hospital.medicoshorario(i) #crea una lista de los medicos habilitados para ese horario
     hospital.dyc(i,2) #funcion dividir y conquistar
     hospital.finalizaciondehorario() #desocupa los medicos
     hospital.aumentartiempodeespera()
-    hospital.pacientefallecido(2)
+    hospital.pacientefallecido(2) #avisa si fallece algun paciente
 
   for j in hospital.listapaciente: #para comprobar si hubo alguno sin atender
     print(j)

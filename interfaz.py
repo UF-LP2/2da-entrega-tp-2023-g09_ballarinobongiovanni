@@ -7,11 +7,9 @@ from src.clases import Enfermero
 from tkinter import scrolledtext
 import csv
 
-
-hp=Hospital("hop")
-en=Enfermero("en")
-app =tk.Tk()
-
+hp=Hospital("Hospital")
+en=Enfermero("Enfermero")
+app=tk.Tk()
 
 def simulacion():
   simulacionventana = tk.Toplevel(app)
@@ -21,9 +19,9 @@ def simulacion():
   text_widget.pack(fill=tk.BOTH, expand=True)
   text_widget.tag_configure("rojo", foreground="red")
 
-  hospital = Hospital("Hospital") #tengo que pasarle info
+  hospital = Hospital("Hospital") 
   """La cantidad de enfermeros dedicados varía. Uno cubre el turno nocturno (23 a 6), dos cubren
-  la mañana (6 a 10), cinco la hora pico (10 a 16) y tres el resto del horario (16 a 23). """
+  la mañana (6 a 10), cinco la hora pico (10 a 16) y tres el resto del horario (16 a 23)."""
   medico_uno = Medico(dni=1, horarioinicio=0, horariofin=72, presentismo=True)
   medico_dos = Medico(dni=2, horarioinicio=72, horariofin=120, presentismo=True)#mañana
   medico_tres = Medico(dni=3, horarioinicio=72, horariofin=120, presentismo=True)
@@ -49,28 +47,28 @@ def simulacion():
   hospital.agregarmedico(medico_once)
   hospital.agregarmedico(medico_doce)
   
-  
   hospital.pacientesarchivo()
   for i in range (288): #cada iteracion son 5 min hora real
     listar = hospital.dearchivo_a_paciente(i)
     if listar == True:
-      en.listado(hospital.listapaciente,hospital) #si ingresan nuevos pacientes , es necesario listarlos
+      en.listado(hospital.listapaciente,hospital) #si ingresan nuevos pacientes, es necesario listarlos
       hospital.ordenar() #ordena con mergesort
 
     hospital.medicoshorario(i) #crea una lista de los medicos habilitados para ese horario
     hospital.dyc(i,text_widget) #funcion dividir y conquistar
     hospital.finalizaciondehorario() #desocupa los medicos
     hospital.aumentartiempodeespera()
-    hospital.pacientefallecido(text_widget)
+    hospital.pacientefallecido(text_widget) #avisa si fallece algun paciente
 
   for j in hospital.listapaciente: #para comprobar si hubo alguno sin atender
     print(j)
   print ("Termino el programa")
+
 def estadisticapac():
   estadisticas_window = tk.Toplevel(app)
   estadisticas_window.title("Estadísticas de Pacientes")
 
-    # Crear etiquetas para mostrar las estadísticas
+  #creo etiquetas para mostrar las estadísticas
   label_rojo = tk.Label(estadisticas_window, text="Rojo:",fg="red")
   label_rojo_count = tk.Label(estadisticas_window, textvariable=count_rojo)
 
@@ -86,7 +84,7 @@ def estadisticapac():
   label_azul = tk.Label(estadisticas_window, text="Azul:",fg="blue")
   label_azul_count = tk.Label(estadisticas_window, textvariable=count_azul)
 
-    # Diseñar la disposición de la ventana de estadísticas
+  #disenio la disposición de la ventana de estadísticas
   label_rojo.grid(row=0, column=0)
   label_rojo_count.grid(row=0, column=1)
 
@@ -101,7 +99,8 @@ def estadisticapac():
 
   label_azul.grid(row=4, column=0)
   label_azul_count.grid(row=4, column=1)
-  hospital = Hospital("Hospital") #tengo que pasarle info
+
+  hospital = Hospital("Hospital") 
   
   medico_uno = Medico(dni=1, horarioinicio=0, horariofin=72, presentismo=True)
   medico_dos = Medico(dni=2, horarioinicio=72, horariofin=120, presentismo=True)#mañana
@@ -128,7 +127,6 @@ def estadisticapac():
   hospital.agregarmedico(medico_once)
   hospital.agregarmedico(medico_doce)
   
-  
   hospital.pacientesarchivo()
   for i in range (288): #cada iteracion son 5 min hora real
     listar = hospital.dearchivo_a_paciente(i)
@@ -141,10 +139,9 @@ count_amarillo = tk.IntVar()
 count_verde = tk.IntVar()
 count_azul = tk.IntVar()
 
-
-# Función que realiza la estadística de pacientes y actualiza la interfaz
+#función que realiza la estadística de pacientes y actualiza la interfaz
 def listado(listapaciente, hospital):
-    global count_rojo, count_naranja, count_amarillo, count_verde, count_azul  # Debes declarar las variables como globales para modificarlas dentro de la función
+    global count_rojo, count_naranja, count_amarillo, count_verde, count_azul #debo declarar las variables como globales para modificarlas dentro de la función
     count_rojo.set(0)
     count_naranja.set(0)
     count_amarillo.set(0)
@@ -174,7 +171,6 @@ def listado(listapaciente, hospital):
             paciente.set_tiempoesperamaximo(240)
             count_azul.set(count_azul.get() + 1)
 
-   
 def listar():
         hp.pacientesarchivo()
         lista_como_cadena = "" #inicializo la cadena vacía
@@ -188,16 +184,12 @@ def listar():
 
         listar_label = tk.Label(listar_window, text="Lista de pacientes:\n{}".format(lista_como_cadena), font=("Arial", 12), justify='left')
         listar_label.pack()
-
-
-       
+  
 app.geometry('500x400')
 app.configure(background="dark sea green")
 app.title("Interfaz")
 titulo_label = tk.Label(app, text="Sistema de Hospital", font=("Helvetica",20),bg= "dark sea green",fg="White")
-
 titulo_label.pack()
-
 
 tk.Button(
     app,
@@ -218,11 +210,10 @@ tk.Button(
 tk.Button(
     app,
     text="Actualizar Estadísticas",
-    font=("Helvetica", 14),
+    font=("Helvetica",14),
     bg="indian red",
     fg="White",
-    command=lambda: estadisticapac()
+    command=lambda:estadisticapac()
 ).pack()
-
 
 app.mainloop()
