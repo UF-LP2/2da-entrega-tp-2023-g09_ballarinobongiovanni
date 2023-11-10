@@ -37,7 +37,7 @@ def main() -> None:
   for i in range (288): #cada iteracion son 5 min hora real
     listar = hospital.dearchivo_a_paciente(i)
     if listar == True:
-      enfermero.listado(hospital.listapaciente,hospital)
+      enfermero.listado(hospital)
       hospital.ordenar() #ordena con mergesort
 
     hospital.medicoshorario(i) #crea una lista de los medicos habilitados para ese horario

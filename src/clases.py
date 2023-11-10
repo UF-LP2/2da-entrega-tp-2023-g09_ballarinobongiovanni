@@ -66,8 +66,9 @@ class Enfermero:
     def __init__(self,dni):
         self.dni= dni
 
-    def listado(self,listapaciente, hospital): 
-         for paciente in listapaciente:
+    def listado(self, hospital): 
+         listapacientecopia = hospital.listapaciente.copy()
+         for paciente in listapacientecopia:
                 if paciente.enfermedad in (Paciente.enfermedades.politraumatismo.value, Paciente.enfermedades.coma.value):
                     hospital.listarojo.append(paciente)
                     hospital.listapaciente.remove(paciente)
@@ -174,25 +175,7 @@ class Hospital:
         else:
             return False 
     
-    def listado(self,listapaciente): 
-         for paciente in listapaciente:
-                if paciente.enfermedad in (Paciente.enfermedades.politraumatismo.value, Paciente.enfermedades.coma.value):
-                    self.listarojo.append(paciente)
-                    self.listapaciente.remove(paciente)
-                elif paciente.enfermedad in (Paciente.enfermedades.convulsion.value, Paciente.enfermedades.hemorragia_dig.value, Paciente.enfermedades.isquemia.value):
-                    self.listanaranja.append(paciente)
-                    paciente.set_tiempoesperamaximo(10)                    
-                elif paciente.enfermedad in (Paciente.enfermedades.cefalea.value, Paciente.enfermedades.paresia.value,
-                                             Paciente.enfermedades.hipertension.value, Paciente.enfermedades.vertigo.value, Paciente.enfermedades.sincope.value, Paciente.enfermedades.urgencia_psi.value):
-                    self.listaamarillo.append(paciente)
-                    paciente.set_tiempoesperamaximo(60)
-                elif paciente.enfermedad in (Paciente.enfermedades.otalgias.value, Paciente.enfermedades.odontalgia.value,
-                                             Paciente.enfermedades.dolor_leve.value, Paciente.enfermedades.traumatismos.value, Paciente.enfermedades.esguinces.value):
-                    self.listaverde.append(paciente)
-                    paciente.set_tiempoesperamaximo(120)
-                else:
-                    self.listaazul.append(paciente)
-                    paciente.set_tiempoesperamaximo(240)
+   
 
     def ordenar(self): #en esta función se está ordenando la cola de pacientes en función de la diferencia entre el tiempo de espera y el tiempo máximo de espera, según el método de mergesort
      

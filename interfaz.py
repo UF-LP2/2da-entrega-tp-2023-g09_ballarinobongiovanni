@@ -51,7 +51,7 @@ def simulacion():
   for i in range (288): #cada iteracion son 5 min hora real
     listar = hospital.dearchivo_a_paciente(i)
     if listar == True:
-      en.listado(hospital.listapaciente,hospital) #si ingresan nuevos pacientes, es necesario listarlos
+      en.listado(hospital) #si ingresan nuevos pacientes, es necesario listarlos
       hospital.ordenar() #ordena con mergesort
 
     hospital.medicoshorario(i) #crea una lista de los medicos habilitados para ese horario
@@ -209,7 +209,7 @@ tk.Button(
 ).pack()
 tk.Button(
     app,
-    text="Actualizar Estadísticas",
+    text="Estadistica Triage",
     font=("Helvetica",14),
     bg="indian red",
     fg="White",

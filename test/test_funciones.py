@@ -23,6 +23,7 @@ def test_dyc():
     p2 = Paciente(dni=4567895, tiempoespera=116, tiempoesperamax=120, enfermedad="Otalgias")
     p3 = Paciente(dni=4567867, tiempoespera=239, tiempoesperamax=240, enfermedad="no urgencia")
     p4 = Paciente(dni=123456789, tiempoespera= 0, tiempoesperamax=0, enfermedad="Politraumatismo grave")
+    enfermero = Enfermero(dni=4566778)
     medico_uno = Medico(dni=45678910, horarioinicio=1, horariofin=10, presentismo=True)
     medico_dos = Medico(dni=12345678, horarioinicio=9, horariofin=14, presentismo=True)
     medico_tres = Medico(dni=98765432, horarioinicio=8, horariofin=12, presentismo=True)
@@ -37,7 +38,7 @@ def test_dyc():
     hp.agregarpaciente(p4)
    
     hp.medicoshorario(9)
-    hp.listado()
+    enfermero.listado(hp)
     hp.ordenar()
     hp.dyc(7,aba)
 
@@ -54,7 +55,7 @@ def test_listado():
     hp.agregarpaciente(p1)
     hp.agregarpaciente(p3)
     hp.agregarpaciente(p4)
-    enfermero.listado(hp.listapaciente,hp)
+    enfermero.listado(hp)
 
     assert(hp.listarojo[0].dni) == (p4.dni)
     assert(hp.listaazul[0].tiempoesperamax) == 240
@@ -85,6 +86,7 @@ def test_greedy():
     medico_uno = Medico(dni=45678910, horarioinicio=1, horariofin=10, presentismo=True)
     medico_dos = Medico(dni=12345678, horarioinicio=9, horariofin=14, presentismo=True)
     medico_tres = Medico(dni=98765432, horarioinicio=8, horariofin=12, presentismo=True)
+    enfermero = Enfermero(dni=4566778)
     aba=2
     hp.agregarmedico(medico_uno)
     hp.agregarmedico(medico_dos)
@@ -98,7 +100,7 @@ def test_greedy():
     hp.agregarpaciente(p6)
 
     hp.medicoshorario(9)
-    hp.listado()
+    enfermero.listado(hp)
     hp.greedy(9,aba)
 
     assert int(len(hp.listanaranja)) == 1
